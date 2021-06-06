@@ -9,9 +9,14 @@ export default {
     input: 'src/scripts/main.js',
     output: {
         file: 'build/scripts/bundle.js',
-        format: 'iife',
+        format: 'es',
         globals: {
-            three: 'THREE',
+            
+            
+            'THREE': 'three',
+            /*'
+            'TrackballControls': 'three-trackballcontrols',
+            'three-globe': 'ThreeGlobe',*/
         },
     },
     plugins: [
@@ -29,7 +34,7 @@ export default {
             // that's you, either use this option or add "browser" to the
             // "mainfields" option, otherwise pkg.browser will be ignored
             browser: true,  // Default: false
-      
+            
             // not all files you want to resolve are .js files
             extensions: [ '.mjs', '.js', '.jsx', '.json' ],  // Default: [ '.mjs', '.js', '.json', '.node' ]
       
@@ -40,7 +45,7 @@ export default {
             // Force resolving for these modules to root's node_modules that helps
             // to prevent bundling the same package multiple times if package is
             // imported from dependencies.
-            dedupe: [ 'three', 'three-glob' ], // Default: []
+            dedupe: [ 'three', 'three-glob', 'TrackballControls'], // Default: []
           }),
         commonjs({
             include: 'node_modules/**'
