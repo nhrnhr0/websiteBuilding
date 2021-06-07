@@ -37,7 +37,6 @@ function _nonIterableSpread$4() {
  * SPDX-License-Identifier: MIT
  */
 const REVISION = '129';
-const MOUSE = { LEFT: 0, MIDDLE: 1, RIGHT: 2, ROTATE: 0, DOLLY: 1, PAN: 2 };
 const CullFaceNone = 0;
 const CullFaceBack = 1;
 const CullFaceFront = 2;
@@ -288,11 +287,11 @@ class EventDispatcher {
 
 }
 
-const _lut = [];
+const _lut$1 = [];
 
 for ( let i = 0; i < 256; i ++ ) {
 
-	_lut[ i ] = ( i < 16 ? '0' : '' ) + ( i ).toString( 16 );
+	_lut$1[ i ] = ( i < 16 ? '0' : '' ) + ( i ).toString( 16 );
 
 }
 
@@ -309,17 +308,17 @@ function generateUUID() {
 	const d1 = Math.random() * 0xffffffff | 0;
 	const d2 = Math.random() * 0xffffffff | 0;
 	const d3 = Math.random() * 0xffffffff | 0;
-	const uuid = _lut[ d0 & 0xff ] + _lut[ d0 >> 8 & 0xff ] + _lut[ d0 >> 16 & 0xff ] + _lut[ d0 >> 24 & 0xff ] + '-' +
-			_lut[ d1 & 0xff ] + _lut[ d1 >> 8 & 0xff ] + '-' + _lut[ d1 >> 16 & 0x0f | 0x40 ] + _lut[ d1 >> 24 & 0xff ] + '-' +
-			_lut[ d2 & 0x3f | 0x80 ] + _lut[ d2 >> 8 & 0xff ] + '-' + _lut[ d2 >> 16 & 0xff ] + _lut[ d2 >> 24 & 0xff ] +
-			_lut[ d3 & 0xff ] + _lut[ d3 >> 8 & 0xff ] + _lut[ d3 >> 16 & 0xff ] + _lut[ d3 >> 24 & 0xff ];
+	const uuid = _lut$1[ d0 & 0xff ] + _lut$1[ d0 >> 8 & 0xff ] + _lut$1[ d0 >> 16 & 0xff ] + _lut$1[ d0 >> 24 & 0xff ] + '-' +
+			_lut$1[ d1 & 0xff ] + _lut$1[ d1 >> 8 & 0xff ] + '-' + _lut$1[ d1 >> 16 & 0x0f | 0x40 ] + _lut$1[ d1 >> 24 & 0xff ] + '-' +
+			_lut$1[ d2 & 0x3f | 0x80 ] + _lut$1[ d2 >> 8 & 0xff ] + '-' + _lut$1[ d2 >> 16 & 0xff ] + _lut$1[ d2 >> 24 & 0xff ] +
+			_lut$1[ d3 & 0xff ] + _lut$1[ d3 >> 8 & 0xff ] + _lut$1[ d3 >> 16 & 0xff ] + _lut$1[ d3 >> 24 & 0xff ];
 
 	// .toUpperCase() here flattens concatenated strings to save heap memory space.
 	return uuid.toUpperCase();
 
 }
 
-function clamp( value, min, max ) {
+function clamp$1( value, min, max ) {
 
 	return Math.max( min, Math.min( max, value ) );
 
@@ -327,7 +326,7 @@ function clamp( value, min, max ) {
 
 // compute euclidian modulo of m % n
 // https://en.wikipedia.org/wiki/Modulo_operation
-function euclideanModulo( n, m ) {
+function euclideanModulo$1( n, m ) {
 
 	return ( ( n % m ) + m ) % m;
 
@@ -356,7 +355,7 @@ function inverseLerp( x, y, value ) {
 }
 
 // https://en.wikipedia.org/wiki/Linear_interpolation
-function lerp( x, y, t ) {
+function lerp$1( x, y, t ) {
 
 	return ( 1 - t ) * x + t * y;
 
@@ -365,14 +364,14 @@ function lerp( x, y, t ) {
 // http://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/
 function damp( x, y, lambda, dt ) {
 
-	return lerp( x, y, 1 - Math.exp( - lambda * dt ) );
+	return lerp$1( x, y, 1 - Math.exp( - lambda * dt ) );
 
 }
 
 // https://www.desmos.com/calculator/vcsjnyz7x4
 function pingpong( x, length = 1 ) {
 
-	return length - Math.abs( euclideanModulo( x, length * 2 ) - length );
+	return length - Math.abs( euclideanModulo$1( x, length * 2 ) - length );
 
 }
 
@@ -524,11 +523,11 @@ var MathUtils = /*#__PURE__*/Object.freeze({
 	DEG2RAD: DEG2RAD,
 	RAD2DEG: RAD2DEG,
 	generateUUID: generateUUID,
-	clamp: clamp,
-	euclideanModulo: euclideanModulo,
+	clamp: clamp$1,
+	euclideanModulo: euclideanModulo$1,
 	mapLinear: mapLinear,
 	inverseLerp: inverseLerp,
-	lerp: lerp,
+	lerp: lerp$1,
 	damp: damp,
 	pingpong: pingpong,
 	smoothstep: smoothstep,
@@ -3038,7 +3037,7 @@ class Quaternion {
 
 	angleTo( q ) {
 
-		return 2 * Math.acos( Math.abs( clamp( this.dot( q ), - 1, 1 ) ) );
+		return 2 * Math.acos( Math.abs( clamp$1( this.dot( q ), - 1, 1 ) ) );
 
 	}
 
@@ -3858,7 +3857,7 @@ class Vector3 {
 
 		// clamp, to handle numerical problems
 
-		return Math.acos( clamp( theta, - 1, 1 ) );
+		return Math.acos( clamp$1( theta, - 1, 1 ) );
 
 	}
 
@@ -6294,7 +6293,7 @@ class Euler {
 
 			case 'XYZ':
 
-				this._y = Math.asin( clamp( m13, - 1, 1 ) );
+				this._y = Math.asin( clamp$1( m13, - 1, 1 ) );
 
 				if ( Math.abs( m13 ) < 0.9999999 ) {
 
@@ -6312,7 +6311,7 @@ class Euler {
 
 			case 'YXZ':
 
-				this._x = Math.asin( - clamp( m23, - 1, 1 ) );
+				this._x = Math.asin( - clamp$1( m23, - 1, 1 ) );
 
 				if ( Math.abs( m23 ) < 0.9999999 ) {
 
@@ -6330,7 +6329,7 @@ class Euler {
 
 			case 'ZXY':
 
-				this._x = Math.asin( clamp( m32, - 1, 1 ) );
+				this._x = Math.asin( clamp$1( m32, - 1, 1 ) );
 
 				if ( Math.abs( m32 ) < 0.9999999 ) {
 
@@ -6348,7 +6347,7 @@ class Euler {
 
 			case 'ZYX':
 
-				this._y = Math.asin( - clamp( m31, - 1, 1 ) );
+				this._y = Math.asin( - clamp$1( m31, - 1, 1 ) );
 
 				if ( Math.abs( m31 ) < 0.9999999 ) {
 
@@ -6366,7 +6365,7 @@ class Euler {
 
 			case 'YZX':
 
-				this._z = Math.asin( clamp( m21, - 1, 1 ) );
+				this._z = Math.asin( clamp$1( m21, - 1, 1 ) );
 
 				if ( Math.abs( m21 ) < 0.9999999 ) {
 
@@ -6384,7 +6383,7 @@ class Euler {
 
 			case 'XZY':
 
-				this._z = Math.asin( - clamp( m12, - 1, 1 ) );
+				this._z = Math.asin( - clamp$1( m12, - 1, 1 ) );
 
 				if ( Math.abs( m12 ) < 0.9999999 ) {
 
@@ -8470,7 +8469,7 @@ class Material extends EventDispatcher {
 
 Material.prototype.isMaterial = true;
 
-const _colorKeywords = { 'aliceblue': 0xF0F8FF, 'antiquewhite': 0xFAEBD7, 'aqua': 0x00FFFF, 'aquamarine': 0x7FFFD4, 'azure': 0xF0FFFF,
+const _colorKeywords$1 = { 'aliceblue': 0xF0F8FF, 'antiquewhite': 0xFAEBD7, 'aqua': 0x00FFFF, 'aquamarine': 0x7FFFD4, 'azure': 0xF0FFFF,
 	'beige': 0xF5F5DC, 'bisque': 0xFFE4C4, 'black': 0x000000, 'blanchedalmond': 0xFFEBCD, 'blue': 0x0000FF, 'blueviolet': 0x8A2BE2,
 	'brown': 0xA52A2A, 'burlywood': 0xDEB887, 'cadetblue': 0x5F9EA0, 'chartreuse': 0x7FFF00, 'chocolate': 0xD2691E, 'coral': 0xFF7F50,
 	'cornflowerblue': 0x6495ED, 'cornsilk': 0xFFF8DC, 'crimson': 0xDC143C, 'cyan': 0x00FFFF, 'darkblue': 0x00008B, 'darkcyan': 0x008B8B,
@@ -8495,10 +8494,10 @@ const _colorKeywords = { 'aliceblue': 0xF0F8FF, 'antiquewhite': 0xFAEBD7, 'aqua'
 	'springgreen': 0x00FF7F, 'steelblue': 0x4682B4, 'tan': 0xD2B48C, 'teal': 0x008080, 'thistle': 0xD8BFD8, 'tomato': 0xFF6347, 'turquoise': 0x40E0D0,
 	'violet': 0xEE82EE, 'wheat': 0xF5DEB3, 'white': 0xFFFFFF, 'whitesmoke': 0xF5F5F5, 'yellow': 0xFFFF00, 'yellowgreen': 0x9ACD32 };
 
-const _hslA = { h: 0, s: 0, l: 0 };
-const _hslB = { h: 0, s: 0, l: 0 };
+const _hslA$1 = { h: 0, s: 0, l: 0 };
+const _hslB$1 = { h: 0, s: 0, l: 0 };
 
-function hue2rgb( p, q, t ) {
+function hue2rgb$1( p, q, t ) {
 
 	if ( t < 0 ) t += 1;
 	if ( t > 1 ) t -= 1;
@@ -8509,19 +8508,19 @@ function hue2rgb( p, q, t ) {
 
 }
 
-function SRGBToLinear( c ) {
+function SRGBToLinear$1( c ) {
 
 	return ( c < 0.04045 ) ? c * 0.0773993808 : Math.pow( c * 0.9478672986 + 0.0521327014, 2.4 );
 
 }
 
-function LinearToSRGB( c ) {
+function LinearToSRGB$1( c ) {
 
 	return ( c < 0.0031308 ) ? c * 12.92 : 1.055 * ( Math.pow( c, 0.41666 ) ) - 0.055;
 
 }
 
-class Color$2 {
+class Color$3 {
 
 	constructor( r, g, b ) {
 
@@ -8591,9 +8590,9 @@ class Color$2 {
 	setHSL( h, s, l ) {
 
 		// h,s,l ranges are in 0.0 - 1.0
-		h = euclideanModulo( h, 1 );
-		s = clamp( s, 0, 1 );
-		l = clamp( l, 0, 1 );
+		h = euclideanModulo$1( h, 1 );
+		s = clamp$1( s, 0, 1 );
+		l = clamp$1( l, 0, 1 );
 
 		if ( s === 0 ) {
 
@@ -8604,9 +8603,9 @@ class Color$2 {
 			const p = l <= 0.5 ? l * ( 1 + s ) : l + s - ( l * s );
 			const q = ( 2 * l ) - p;
 
-			this.r = hue2rgb( q, p, h + 1 / 3 );
-			this.g = hue2rgb( q, p, h );
-			this.b = hue2rgb( q, p, h - 1 / 3 );
+			this.r = hue2rgb$1( q, p, h + 1 / 3 );
+			this.g = hue2rgb$1( q, p, h );
+			this.b = hue2rgb$1( q, p, h - 1 / 3 );
 
 		}
 
@@ -8734,7 +8733,7 @@ class Color$2 {
 	setColorName( style ) {
 
 		// color keywords
-		const hex = _colorKeywords[ style.toLowerCase() ];
+		const hex = _colorKeywords$1[ style.toLowerCase() ];
 
 		if ( hex !== undefined ) {
 
@@ -8808,9 +8807,9 @@ class Color$2 {
 
 	copySRGBToLinear( color ) {
 
-		this.r = SRGBToLinear( color.r );
-		this.g = SRGBToLinear( color.g );
-		this.b = SRGBToLinear( color.b );
+		this.r = SRGBToLinear$1( color.r );
+		this.g = SRGBToLinear$1( color.g );
+		this.b = SRGBToLinear$1( color.b );
 
 		return this;
 
@@ -8818,9 +8817,9 @@ class Color$2 {
 
 	copyLinearToSRGB( color ) {
 
-		this.r = LinearToSRGB( color.r );
-		this.g = LinearToSRGB( color.g );
-		this.b = LinearToSRGB( color.b );
+		this.r = LinearToSRGB$1( color.r );
+		this.g = LinearToSRGB$1( color.g );
+		this.b = LinearToSRGB$1( color.b );
 
 		return this;
 
@@ -8912,11 +8911,11 @@ class Color$2 {
 
 	offsetHSL( h, s, l ) {
 
-		this.getHSL( _hslA );
+		this.getHSL( _hslA$1 );
 
-		_hslA.h += h; _hslA.s += s; _hslA.l += l;
+		_hslA$1.h += h; _hslA$1.s += s; _hslA$1.l += l;
 
-		this.setHSL( _hslA.h, _hslA.s, _hslA.l );
+		this.setHSL( _hslA$1.h, _hslA$1.s, _hslA$1.l );
 
 		return this;
 
@@ -9004,12 +9003,12 @@ class Color$2 {
 
 	lerpHSL( color, alpha ) {
 
-		this.getHSL( _hslA );
-		color.getHSL( _hslB );
+		this.getHSL( _hslA$1 );
+		color.getHSL( _hslB$1 );
 
-		const h = lerp( _hslA.h, _hslB.h, alpha );
-		const s = lerp( _hslA.s, _hslB.s, alpha );
-		const l = lerp( _hslA.l, _hslB.l, alpha );
+		const h = lerp$1( _hslA$1.h, _hslB$1.h, alpha );
+		const s = lerp$1( _hslA$1.s, _hslB$1.s, alpha );
+		const l = lerp$1( _hslA$1.l, _hslB$1.l, alpha );
 
 		this.setHSL( h, s, l );
 
@@ -9071,12 +9070,12 @@ class Color$2 {
 
 }
 
-Color$2.NAMES = _colorKeywords;
+Color$3.NAMES = _colorKeywords$1;
 
-Color$2.prototype.isColor = true;
-Color$2.prototype.r = 1;
-Color$2.prototype.g = 1;
-Color$2.prototype.b = 1;
+Color$3.prototype.isColor = true;
+Color$3.prototype.r = 1;
+Color$3.prototype.g = 1;
+Color$3.prototype.b = 1;
 
 /**
  * parameters = {
@@ -9117,7 +9116,7 @@ class MeshBasicMaterial extends Material {
 
 		this.type = 'MeshBasicMaterial';
 
-		this.color = new Color$2( 0xffffff ); // emissive
+		this.color = new Color$3( 0xffffff ); // emissive
 
 		this.map = null;
 
@@ -9277,7 +9276,7 @@ class BufferAttribute {
 			if ( color === undefined ) {
 
 				console.warn( 'THREE.BufferAttribute.copyColorsArray(): color is undefined', i );
-				color = new Color$2();
+				color = new Color$3();
 
 			}
 
@@ -13073,7 +13072,7 @@ const UniformsLib = {
 
 	common: {
 
-		diffuse: { value: new Color$2( 0xffffff ) },
+		diffuse: { value: new Color$3( 0xffffff ) },
 		opacity: { value: 1.0 },
 
 		map: { value: null },
@@ -13165,7 +13164,7 @@ const UniformsLib = {
 		fogDensity: { value: 0.00025 },
 		fogNear: { value: 1 },
 		fogFar: { value: 2000 },
-		fogColor: { value: new Color$2( 0xffffff ) }
+		fogColor: { value: new Color$3( 0xffffff ) }
 
 	},
 
@@ -13250,7 +13249,7 @@ const UniformsLib = {
 
 	points: {
 
-		diffuse: { value: new Color$2( 0xffffff ) },
+		diffuse: { value: new Color$3( 0xffffff ) },
 		opacity: { value: 1.0 },
 		size: { value: 1.0 },
 		scale: { value: 1.0 },
@@ -13262,7 +13261,7 @@ const UniformsLib = {
 
 	sprite: {
 
-		diffuse: { value: new Color$2( 0xffffff ) },
+		diffuse: { value: new Color$3( 0xffffff ) },
 		opacity: { value: 1.0 },
 		center: { value: new Vector2( 0.5, 0.5 ) },
 		rotation: { value: 0.0 },
@@ -13304,7 +13303,7 @@ const ShaderLib = {
 			UniformsLib.fog,
 			UniformsLib.lights,
 			{
-				emissive: { value: new Color$2( 0x000000 ) }
+				emissive: { value: new Color$3( 0x000000 ) }
 			}
 		] ),
 
@@ -13328,8 +13327,8 @@ const ShaderLib = {
 			UniformsLib.fog,
 			UniformsLib.lights,
 			{
-				emissive: { value: new Color$2( 0x000000 ) },
-				specular: { value: new Color$2( 0x111111 ) },
+				emissive: { value: new Color$3( 0x000000 ) },
+				specular: { value: new Color$3( 0x111111 ) },
 				shininess: { value: 30 }
 			}
 		] ),
@@ -13355,7 +13354,7 @@ const ShaderLib = {
 			UniformsLib.fog,
 			UniformsLib.lights,
 			{
-				emissive: { value: new Color$2( 0x000000 ) },
+				emissive: { value: new Color$3( 0x000000 ) },
 				roughness: { value: 1.0 },
 				metalness: { value: 0.0 },
 				envMapIntensity: { value: 1 } // temporary
@@ -13381,7 +13380,7 @@ const ShaderLib = {
 			UniformsLib.fog,
 			UniformsLib.lights,
 			{
-				emissive: { value: new Color$2( 0x000000 ) }
+				emissive: { value: new Color$3( 0x000000 ) }
 			}
 		] ),
 
@@ -13541,7 +13540,7 @@ const ShaderLib = {
 			UniformsLib.lights,
 			UniformsLib.fog,
 			{
-				color: { value: new Color$2( 0x00000 ) },
+				color: { value: new Color$3( 0x00000 ) },
 				opacity: { value: 1.0 }
 			},
 		] ),
@@ -13564,7 +13563,7 @@ ShaderLib.physical = {
 			clearcoatRoughnessMap: { value: null },
 			clearcoatNormalScale: { value: new Vector2( 1, 1 ) },
 			clearcoatNormalMap: { value: null },
-			sheen: { value: new Color$2( 0x000000 ) },
+			sheen: { value: new Color$3( 0x000000 ) },
 			transmission: { value: 0 },
 			transmissionMap: { value: null },
 			transmissionSamplerSize: { value: new Vector2() },
@@ -13572,7 +13571,7 @@ ShaderLib.physical = {
 			thickness: { value: 0 },
 			thicknessMap: { value: null },
 			attenuationDistance: { value: 0 },
-			attenuationColor: { value: new Color$2( 0x000000 ) }
+			attenuationColor: { value: new Color$3( 0x000000 ) }
 		}
 	] ),
 
@@ -13583,7 +13582,7 @@ ShaderLib.physical = {
 
 function WebGLBackground( renderer, cubemaps, state, objects, premultipliedAlpha ) {
 
-	const clearColor = new Color$2( 0x000000 );
+	const clearColor = new Color$3( 0x000000 );
 	let clearAlpha = 0;
 
 	let planeMesh;
@@ -18066,7 +18065,7 @@ function UniformsCache() {
 				case 'DirectionalLight':
 					uniforms = {
 						direction: new Vector3(),
-						color: new Color$2()
+						color: new Color$3()
 					};
 					break;
 
@@ -18074,7 +18073,7 @@ function UniformsCache() {
 					uniforms = {
 						position: new Vector3(),
 						direction: new Vector3(),
-						color: new Color$2(),
+						color: new Color$3(),
 						distance: 0,
 						coneCos: 0,
 						penumbraCos: 0,
@@ -18085,7 +18084,7 @@ function UniformsCache() {
 				case 'PointLight':
 					uniforms = {
 						position: new Vector3(),
-						color: new Color$2(),
+						color: new Color$3(),
 						distance: 0,
 						decay: 0
 					};
@@ -18094,14 +18093,14 @@ function UniformsCache() {
 				case 'HemisphereLight':
 					uniforms = {
 						direction: new Vector3(),
-						skyColor: new Color$2(),
-						groundColor: new Color$2()
+						skyColor: new Color$3(),
+						groundColor: new Color$3()
 					};
 					break;
 
 				case 'RectAreaLight':
 					uniforms = {
-						color: new Color$2(),
+						color: new Color$3(),
 						position: new Vector3(),
 						halfWidth: new Vector3(),
 						halfHeight: new Vector3()
@@ -23915,7 +23914,7 @@ function WebGLRenderer( parameters ) {
 
 			console.warn( 'WebGLRenderer: .getClearColor() now requires a Color as an argument' );
 
-			target = new Color$2();
+			target = new Color$3();
 
 		}
 
@@ -26088,7 +26087,7 @@ class SpriteMaterial extends Material {
 
 		this.type = 'SpriteMaterial';
 
-		this.color = new Color$2( 0xffffff );
+		this.color = new Color$3( 0xffffff );
 
 		this.map = null;
 
@@ -26621,7 +26620,7 @@ class LineBasicMaterial extends Material {
 
 		this.type = 'LineBasicMaterial';
 
-		this.color = new Color$2( 0xffffff );
+		this.color = new Color$3( 0xffffff );
 
 		this.linewidth = 1;
 		this.linecap = 'round';
@@ -26990,7 +26989,7 @@ class PointsMaterial extends Material {
 
 		this.type = 'PointsMaterial';
 
-		this.color = new Color$2( 0xffffff );
+		this.color = new Color$3( 0xffffff );
 
 		this.map = null;
 
@@ -29961,7 +29960,7 @@ class ShadowMaterial extends Material {
 
 		this.type = 'ShadowMaterial';
 
-		this.color = new Color$2( 0x000000 );
+		this.color = new Color$3( 0x000000 );
 		this.transparent = true;
 
 		this.setValues( parameters );
@@ -30057,7 +30056,7 @@ class MeshStandardMaterial extends Material {
 
 		this.type = 'MeshStandardMaterial';
 
-		this.color = new Color$2( 0xffffff ); // diffuse
+		this.color = new Color$3( 0xffffff ); // diffuse
 		this.roughness = 1.0;
 		this.metalness = 0.0;
 
@@ -30069,7 +30068,7 @@ class MeshStandardMaterial extends Material {
 		this.aoMap = null;
 		this.aoMapIntensity = 1.0;
 
-		this.emissive = new Color$2( 0x000000 );
+		this.emissive = new Color$3( 0x000000 );
 		this.emissiveIntensity = 1.0;
 		this.emissiveMap = null;
 
@@ -30231,7 +30230,7 @@ class MeshPhysicalMaterial extends MeshStandardMaterial {
 			},
 			set: function ( ior ) {
 
-				this.reflectivity = clamp( 2.5 * ( ior - 1 ) / ( ior + 1 ), 0, 1 );
+				this.reflectivity = clamp$1( 2.5 * ( ior - 1 ) / ( ior + 1 ), 0, 1 );
 
 			}
 		} );
@@ -30244,7 +30243,7 @@ class MeshPhysicalMaterial extends MeshStandardMaterial {
 		this.thickness = 0.01;
 		this.thicknessMap = null;
 		this.attenuationDistance = 0.0;
-		this.attenuationColor = new Color$2( 1, 1, 1 );
+		this.attenuationColor = new Color$3( 1, 1, 1 );
 
 		this.setValues( parameters );
 
@@ -30272,7 +30271,7 @@ class MeshPhysicalMaterial extends MeshStandardMaterial {
 
 		if ( source.sheen ) {
 
-			this.sheen = ( this.sheen || new Color$2() ).copy( source.sheen );
+			this.sheen = ( this.sheen || new Color$3() ).copy( source.sheen );
 
 		} else {
 
@@ -30353,8 +30352,8 @@ class MeshPhongMaterial extends Material {
 
 		this.type = 'MeshPhongMaterial';
 
-		this.color = new Color$2( 0xffffff ); // diffuse
-		this.specular = new Color$2( 0x111111 );
+		this.color = new Color$3( 0xffffff ); // diffuse
+		this.specular = new Color$3( 0x111111 );
 		this.shininess = 30;
 
 		this.map = null;
@@ -30365,7 +30364,7 @@ class MeshPhongMaterial extends Material {
 		this.aoMap = null;
 		this.aoMapIntensity = 1.0;
 
-		this.emissive = new Color$2( 0x000000 );
+		this.emissive = new Color$3( 0x000000 );
 		this.emissiveIntensity = 1.0;
 		this.emissiveMap = null;
 
@@ -30509,7 +30508,7 @@ class MeshToonMaterial extends Material {
 
 		this.type = 'MeshToonMaterial';
 
-		this.color = new Color$2( 0xffffff );
+		this.color = new Color$3( 0xffffff );
 
 		this.map = null;
 		this.gradientMap = null;
@@ -30520,7 +30519,7 @@ class MeshToonMaterial extends Material {
 		this.aoMap = null;
 		this.aoMapIntensity = 1.0;
 
-		this.emissive = new Color$2( 0x000000 );
+		this.emissive = new Color$3( 0x000000 );
 		this.emissiveIntensity = 1.0;
 		this.emissiveMap = null;
 
@@ -30728,7 +30727,7 @@ class MeshLambertMaterial extends Material {
 
 		this.type = 'MeshLambertMaterial';
 
-		this.color = new Color$2( 0xffffff ); // diffuse
+		this.color = new Color$3( 0xffffff ); // diffuse
 
 		this.map = null;
 
@@ -30738,7 +30737,7 @@ class MeshLambertMaterial extends Material {
 		this.aoMap = null;
 		this.aoMapIntensity = 1.0;
 
-		this.emissive = new Color$2( 0x000000 );
+		this.emissive = new Color$3( 0x000000 );
 		this.emissiveIntensity = 1.0;
 		this.emissiveMap = null;
 
@@ -30845,7 +30844,7 @@ class MeshMatcapMaterial extends Material {
 
 		this.type = 'MeshMatcapMaterial';
 
-		this.color = new Color$2( 0xffffff ); // diffuse
+		this.color = new Color$3( 0xffffff ); // diffuse
 
 		this.matcap = null;
 
@@ -33801,7 +33800,7 @@ class Curve {
 
 				vec.normalize();
 
-				const theta = Math.acos( clamp( tangents[ i - 1 ].dot( tangents[ i ] ), - 1, 1 ) ); // clamp for floating pt errors
+				const theta = Math.acos( clamp$1( tangents[ i - 1 ].dot( tangents[ i ] ), - 1, 1 ) ); // clamp for floating pt errors
 
 				normals[ i ].applyMatrix4( mat.makeRotationAxis( vec, theta ) );
 
@@ -33815,7 +33814,7 @@ class Curve {
 
 		if ( closed === true ) {
 
-			let theta = Math.acos( clamp( normals[ 0 ].dot( normals[ segments ] ), - 1, 1 ) );
+			let theta = Math.acos( clamp$1( normals[ 0 ].dot( normals[ segments ] ), - 1, 1 ) );
 			theta /= segments;
 
 			if ( tangents[ 0 ].dot( vec.crossVectors( normals[ 0 ], normals[ segments ] ) ) > 0 ) {
@@ -35461,7 +35460,7 @@ class Light extends Object3D {
 
 		this.type = 'Light';
 
-		this.color = new Color$2( color );
+		this.color = new Color$3( color );
 		this.intensity = intensity;
 
 	}
@@ -35518,7 +35517,7 @@ class HemisphereLight extends Light {
 		this.position.copy( Object3D.DefaultUp );
 		this.updateMatrix();
 
-		this.groundColor = new Color$2( groundColor );
+		this.groundColor = new Color$3( groundColor );
 
 	}
 
@@ -36685,7 +36684,7 @@ class ShapePath {
 
 		this.type = 'ShapePath';
 
-		this.color = new Color$2();
+		this.color = new Color$3();
 
 		this.subPaths = [];
 		this.currentPath = null;
@@ -37191,8 +37190,8 @@ class HemisphereLightProbe extends LightProbe {
 
 		super( undefined, intensity );
 
-		const color1 = new Color$2().set( skyColor );
-		const color2 = new Color$2().set( groundColor );
+		const color1 = new Color$3().set( skyColor );
+		const color2 = new Color$3().set( groundColor );
 
 		const sky = new Vector3( color1.r, color1.g, color1.b );
 		const ground = new Vector3( color2.r, color2.g, color2.b );
@@ -37216,7 +37215,7 @@ class AmbientLightProbe extends LightProbe {
 
 		super( undefined, intensity );
 
-		const color1 = new Color$2().set( color );
+		const color1 = new Color$3().set( color );
 
 		// without extra factor of PI in the shader, would be 2 / Math.sqrt( Math.PI );
 		this.sh.coefficients[ 0 ].set( color1.r, color1.g, color1.b ).multiplyScalar( 2 * Math.sqrt( Math.PI ) );
@@ -40220,7 +40219,7 @@ class Line3 {
 
 		if ( clampToLine ) {
 
-			t = clamp( t, 0, 1 );
+			t = clamp$1( t, 0, 1 );
 
 		}
 
@@ -40309,8 +40308,8 @@ class SkeletonHelper extends LineSegments {
 		const vertices = [];
 		const colors = [];
 
-		const color1 = new Color$2( 0, 0, 1 );
-		const color2 = new Color$2( 0, 1, 0 );
+		const color1 = new Color$3( 0, 0, 1 );
+		const color2 = new Color$3( 0, 1, 0 );
 
 		for ( let i = 0; i < bones.length; i ++ ) {
 
@@ -40407,8 +40406,8 @@ class GridHelper extends LineSegments {
 
 	constructor( size = 10, divisions = 10, color1 = 0x444444, color2 = 0x888888 ) {
 
-		color1 = new Color$2( color1 );
-		color2 = new Color$2( color2 );
+		color1 = new Color$3( color1 );
+		color2 = new Color$3( color2 );
 
 		const center = divisions / 2;
 		const step = size / divisions;
@@ -41408,7 +41407,7 @@ Object.defineProperties( Material.prototype, {
 		get: function () {
 
 			console.warn( 'THREE.Material: .wrapRGB has been removed.' );
-			return new Color$2();
+			return new Color$3();
 
 		}
 	},
@@ -47891,7 +47890,7 @@ function extend$1(parent, definition) {
   return prototype;
 }
 
-function Color$1() {}
+function Color$2() {}
 
 var darker$1 = 0.7;
 var brighter$1 = 1 / darker$1;
@@ -48058,7 +48057,7 @@ var named$1 = {
   yellowgreen: 0x9acd32
 };
 
-define$1(Color$1, color$1, {
+define$1(Color$2, color$1, {
   copy: function(channels) {
     return Object.assign(new this.constructor, this, channels);
   },
@@ -48113,7 +48112,7 @@ function rgba$1(r, g, b, a) {
 }
 
 function rgbConvert$1(o) {
-  if (!(o instanceof Color$1)) o = color$1(o);
+  if (!(o instanceof Color$2)) o = color$1(o);
   if (!o) return new Rgb$1;
   o = o.rgb();
   return new Rgb$1(o.r, o.g, o.b, o.opacity);
@@ -48130,7 +48129,7 @@ function Rgb$1(r, g, b, opacity) {
   this.opacity = +opacity;
 }
 
-define$1(Rgb$1, rgb$2, extend$1(Color$1, {
+define$1(Rgb$1, rgb$2, extend$1(Color$2, {
   brighter: function(k) {
     k = k == null ? brighter$1 : Math.pow(brighter$1, k);
     return new Rgb$1(this.r * k, this.g * k, this.b * k, this.opacity);
@@ -48181,7 +48180,7 @@ function hsla$1(h, s, l, a) {
 
 function hslConvert$1(o) {
   if (o instanceof Hsl$1) return new Hsl$1(o.h, o.s, o.l, o.opacity);
-  if (!(o instanceof Color$1)) o = color$1(o);
+  if (!(o instanceof Color$2)) o = color$1(o);
   if (!o) return new Hsl$1;
   if (o instanceof Hsl$1) return o;
   o = o.rgb();
@@ -48216,7 +48215,7 @@ function Hsl$1(h, s, l, opacity) {
   this.opacity = +opacity;
 }
 
-define$1(Hsl$1, hsl$1, extend$1(Color$1, {
+define$1(Hsl$1, hsl$1, extend$1(Color$2, {
   brighter: function(k) {
     k = k == null ? brighter$1 : Math.pow(brighter$1, k);
     return new Hsl$1(this.h, this.s, this.l * k, this.opacity);
@@ -53554,7 +53553,7 @@ function extend(parent, definition) {
   return prototype;
 }
 
-function Color() {}
+function Color$1() {}
 
 var darker = 0.7;
 var brighter = 1 / darker;
@@ -53721,7 +53720,7 @@ var named = {
   yellowgreen: 0x9acd32
 };
 
-define(Color, color, {
+define(Color$1, color, {
   copy: function(channels) {
     return Object.assign(new this.constructor, this, channels);
   },
@@ -53776,7 +53775,7 @@ function rgba(r, g, b, a) {
 }
 
 function rgbConvert(o) {
-  if (!(o instanceof Color)) o = color(o);
+  if (!(o instanceof Color$1)) o = color(o);
   if (!o) return new Rgb;
   o = o.rgb();
   return new Rgb(o.r, o.g, o.b, o.opacity);
@@ -53793,7 +53792,7 @@ function Rgb(r, g, b, opacity) {
   this.opacity = +opacity;
 }
 
-define(Rgb, rgb, extend(Color, {
+define(Rgb, rgb, extend(Color$1, {
   brighter: function(k) {
     k = k == null ? brighter : Math.pow(brighter, k);
     return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
@@ -53844,7 +53843,7 @@ function hsla(h, s, l, a) {
 
 function hslConvert(o) {
   if (o instanceof Hsl) return new Hsl(o.h, o.s, o.l, o.opacity);
-  if (!(o instanceof Color)) o = color(o);
+  if (!(o instanceof Color$1)) o = color(o);
   if (!o) return new Hsl;
   if (o instanceof Hsl) return o;
   o = o.rgb();
@@ -53879,7 +53878,7 @@ function Hsl(h, s, l, opacity) {
   this.opacity = +opacity;
 }
 
-define(Hsl, hsl, extend(Color, {
+define(Hsl, hsl, extend(Color$1, {
   brighter: function(k) {
     k = k == null ? brighter : Math.pow(brighter, k);
     return new Hsl(this.h, this.s, this.l * k, this.opacity);
@@ -53961,7 +53960,7 @@ function Cubehelix(h, s, l, opacity) {
   this.opacity = +opacity;
 }
 
-define(Cubehelix, cubehelix$1, extend(Color, {
+define(Cubehelix, cubehelix$1, extend(Color$1, {
   brighter: function(k) {
     k = k == null ? brighter : Math.pow(brighter, k);
     return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
@@ -68519,7 +68518,7 @@ var THREE$b = window.THREE ? window.THREE // Prefer consumption from global THRE
 : {
   BackSide: BackSide,
   BufferAttribute: BufferAttribute,
-  Color: Color$2,
+  Color: Color$3,
   Mesh: Mesh,
   ShaderMaterial: ShaderMaterial
 };
@@ -68586,7 +68585,7 @@ function createGlowMesh(geometry) {
 
 var THREE$a = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
 : {
-  Color: Color$2,
+  Color: Color$3,
   LineBasicMaterial: LineBasicMaterial,
   LineSegments: LineSegments,
   Mesh: Mesh,
@@ -68771,7 +68770,7 @@ var THREE$9 = window.THREE ? window.THREE // Prefer consumption from global THRE
 : {
   BufferAttribute: BufferAttribute,
   BufferGeometry: BufferGeometry,
-  Color: Color$2,
+  Color: Color$3,
   CylinderBufferGeometry: CylinderGeometry,
   Matrix4: Matrix4,
   Mesh: Mesh,
@@ -69316,7 +69315,7 @@ var THREE$7 = window.THREE ? window.THREE // Prefer consumption from global THRE
 : {
   BufferAttribute: BufferAttribute,
   BufferGeometry: BufferGeometry,
-  Color: Color$2,
+  Color: Color$3,
   DoubleSide: DoubleSide,
   Mesh: Mesh,
   MeshBasicMaterial: MeshBasicMaterial,
@@ -69990,7 +69989,7 @@ function interpolateVectors(fromPnts, toPnts) {
 var THREE$3 = window.THREE ? window.THREE // Prefer consumption from global THREE, if exists
 : {
   BufferGeometry: BufferGeometry,
-  Color: Color$2,
+  Color: Color$3,
   Float32BufferAttribute: Float32BufferAttribute,
   Group: Group$1,
   Line: Line,
@@ -70983,587 +70982,1760 @@ var three = window.THREE ? window.THREE : {
 }; // Prefer consumption from global THREE, if exists
 var threeGlobe = fromKapsule(Globe$1, three.Group, true);
 
-var TrackballControls = function TrackballControls(object, domElement) {
-  // Pre-flight checks, with warnings / errors.
-  if (domElement === undefined) console.warn('THREE.TrackballControls: The second parameter "domElement" is now mandatory.');
-  if (domElement === document) console.error('THREE.TrackballControls: "document" should not be used as the target "domElement". Please use "renderer.domElement" instead.');
-  var scope = this;
-  var STATE = {
-    NONE: -1,
-    ROTATE: 0,
-    ZOOM: 1,
-    PAN: 2,
-    TOUCH_ROTATE: 3,
-    TOUCH_ZOOM_PAN: 4
-  };
-  this.object = object;
-  this.domElement = domElement; // API
-
-  this.enabled = true;
-  this.screen = {
-    left: 0,
-    top: 0,
-    width: 0,
-    height: 0
-  };
-  this.rotateSpeed = 1.0;
-  this.zoomSpeed = 1.2;
-  this.panSpeed = 0.3;
-  this.noRotate = false;
-  this.noZoom = false;
-  this.noPan = false;
-  this.staticMoving = false;
-  this.dynamicDampingFactor = 0.2;
-  this.minDistance = 0;
-  this.maxDistance = Infinity;
-  /**
-   * `KeyboardEvent.keyCode` values which should trigger the different 
-   * interaction states. Each element can be a single code or an array
-   * of codes. All elements are required.
-   */
-
-  this.keys = [65, // A 
-  83, // S 
-  68 // D
-  ];
-  /**
-   * `Event` for pointer interactions which should trigger different
-   * interaction states.
-   */
-
-  this.mouseButtons = {
-    LEFT: MOUSE.ROTATE,
-    MIDDLE: MOUSE.ZOOM,
-    RIGHT: MOUSE.PAN
-  }; // internals
-
-  this.target = new Vector3();
-  var EPS = 0.000001;
-  var lastPosition = new Vector3();
-
-  var _state = STATE.NONE,
-      _keyState = STATE.NONE,
-      _eye = new Vector3(),
-      _movePrev = new Vector2(),
-      _moveCurr = new Vector2(),
-      _lastAxis = new Vector3(),
-      _lastAngle = 0,
-      _zoomStart = new Vector2(),
-      _zoomEnd = new Vector2(),
-      _touchZoomDistanceStart = 0,
-      _touchZoomDistanceEnd = 0,
-      _panStart = new Vector2(),
-      _panEnd = new Vector2(); // for reset
-
-
-  this.target0 = this.target.clone();
-  this.position0 = this.object.position.clone();
-  this.up0 = this.object.up.clone();
-  this.zoom0 = this.object.zoom; // events
-
-  var changeEvent = {
-    type: 'change'
-  };
-  var startEvent = {
-    type: 'start'
-  };
-  var endEvent = {
-    type: 'end'
-  }; // methods
-
-  this.handleResize = function () {
-    var box = scope.domElement.getBoundingClientRect(); // Adjustments come from similar code in the jquery offset() function.
-
-    var d = scope.domElement.ownerDocument.documentElement;
-    scope.screen.left = box.left + window.pageXOffset - d.clientLeft;
-    scope.screen.top = box.top + window.pageYOffset - d.clientTop;
-    scope.screen.width = box.width;
-    scope.screen.height = box.height;
-  };
-
-  var getMouseOnScreen = function () {
-    var vector = new Vector2();
-    return function getMouseOnScreen(pageX, pageY) {
-      vector.set((pageX - scope.screen.left) / scope.screen.width, (pageY - scope.screen.top) / scope.screen.height);
-      return vector;
-    };
-  }();
-
-  var getMouseOnCircle = function () {
-    var vector = new Vector2();
-    return function getMouseOnCircle(pageX, pageY) {
-      vector.set((pageX - scope.screen.width * 0.5 - scope.screen.left) / (scope.screen.width * 0.5), (scope.screen.height + 2 * (scope.screen.top - pageY)) / scope.screen.width // screen.width intentional
-      );
-      return vector;
-    };
-  }();
-
-  this.rotateCamera = function () {
-    var axis = new Vector3(),
-        quaternion = new Quaternion(),
-        eyeDirection = new Vector3(),
-        objectUpDirection = new Vector3(),
-        objectSidewaysDirection = new Vector3(),
-        moveDirection = new Vector3(),
-        angle;
-    return function rotateCamera() {
-      moveDirection.set(_moveCurr.x - _movePrev.x, _moveCurr.y - _movePrev.y, 0);
-      angle = moveDirection.length();
-
-      if (angle) {
-        _eye.copy(scope.object.position).sub(scope.target);
-
-        eyeDirection.copy(_eye).normalize();
-        objectUpDirection.copy(scope.object.up).normalize();
-        objectSidewaysDirection.crossVectors(objectUpDirection, eyeDirection).normalize();
-        objectUpDirection.setLength(_moveCurr.y - _movePrev.y);
-        objectSidewaysDirection.setLength(_moveCurr.x - _movePrev.x);
-        moveDirection.copy(objectUpDirection.add(objectSidewaysDirection));
-        axis.crossVectors(moveDirection, _eye).normalize();
-        angle *= scope.rotateSpeed;
-        quaternion.setFromAxisAngle(axis, angle);
-
-        _eye.applyQuaternion(quaternion);
-
-        scope.object.up.applyQuaternion(quaternion);
-
-        _lastAxis.copy(axis);
-
-        _lastAngle = angle;
-      } else if (!scope.staticMoving && _lastAngle) {
-        _lastAngle *= Math.sqrt(1.0 - scope.dynamicDampingFactor);
-
-        _eye.copy(scope.object.position).sub(scope.target);
-
-        quaternion.setFromAxisAngle(_lastAxis, _lastAngle);
-
-        _eye.applyQuaternion(quaternion);
-
-        scope.object.up.applyQuaternion(quaternion);
-      }
-
-      _movePrev.copy(_moveCurr);
-    };
-  }();
-
-  this.zoomCamera = function () {
-    var factor;
-
-    if (_state === STATE.TOUCH_ZOOM_PAN) {
-      factor = _touchZoomDistanceStart / _touchZoomDistanceEnd;
-      _touchZoomDistanceStart = _touchZoomDistanceEnd;
-
-      _eye.multiplyScalar(factor);
-    } else {
-      factor = 1.0 + (_zoomEnd.y - _zoomStart.y) * scope.zoomSpeed;
-
-      if (factor !== 1.0 && factor > 0.0) {
-        _eye.multiplyScalar(factor);
-      }
-
-      if (scope.staticMoving) {
-        _zoomStart.copy(_zoomEnd);
-      } else {
-        _zoomStart.y += (_zoomEnd.y - _zoomStart.y) * this.dynamicDampingFactor;
-      }
-    }
-  };
-
-  this.panCamera = function () {
-    var mouseChange = new Vector2(),
-        objectUp = new Vector3(),
-        pan = new Vector3();
-    return function panCamera() {
-      mouseChange.copy(_panEnd).sub(_panStart);
-
-      if (mouseChange.lengthSq()) {
-        mouseChange.multiplyScalar(_eye.length() * scope.panSpeed);
-        pan.copy(_eye).cross(scope.object.up).setLength(mouseChange.x);
-        pan.add(objectUp.copy(scope.object.up).setLength(mouseChange.y));
-        scope.object.position.add(pan);
-        scope.target.add(pan);
-
-        if (scope.staticMoving) {
-          _panStart.copy(_panEnd);
-        } else {
-          _panStart.add(mouseChange.subVectors(_panEnd, _panStart).multiplyScalar(scope.dynamicDampingFactor));
-        }
-      }
-    };
-  }();
-
-  this.checkDistances = function () {
-    if (!scope.noZoom || !scope.noPan) {
-      if (_eye.lengthSq() > scope.maxDistance * scope.maxDistance) {
-        scope.object.position.addVectors(scope.target, _eye.setLength(scope.maxDistance));
-
-        _zoomStart.copy(_zoomEnd);
-      }
-
-      if (_eye.lengthSq() < scope.minDistance * scope.minDistance) {
-        scope.object.position.addVectors(scope.target, _eye.setLength(scope.minDistance));
-
-        _zoomStart.copy(_zoomEnd);
-      }
-    }
-  };
-
-  this.update = function () {
-    _eye.subVectors(scope.object.position, scope.target);
-
-    if (!scope.noRotate) {
-      scope.rotateCamera();
-    }
-
-    if (!scope.noZoom) {
-      scope.zoomCamera();
-    }
-
-    if (!scope.noPan) {
-      scope.panCamera();
-    }
-
-    scope.object.position.addVectors(scope.target, _eye);
-    scope.checkDistances();
-    scope.object.lookAt(scope.target);
-
-    if (lastPosition.distanceToSquared(scope.object.position) > EPS) {
-      scope.dispatchEvent(changeEvent);
-      lastPosition.copy(scope.object.position);
-    }
-  };
-
-  this.reset = function () {
-    _state = STATE.NONE;
-    _keyState = STATE.NONE;
-    scope.target.copy(scope.target0);
-    scope.object.position.copy(scope.position0);
-    scope.object.up.copy(scope.up0);
-
-    _eye.subVectors(scope.object.position, scope.target);
-
-    scope.object.lookAt(scope.target);
-    scope.dispatchEvent(changeEvent);
-    lastPosition.copy(scope.object.position);
-  }; // Listeners
-
-
-  function onPointerDown(event) {
-    if (scope.enabled === false) return;
-
-    switch (event.pointerType) {
-      case 'mouse':
-      case 'pen':
-        onMouseDown(event);
-        break;
-      // TODO touch
-    }
-  }
-
-  function onPointerMove(event) {
-    if (scope.enabled === false) return;
-
-    switch (event.pointerType) {
-      case 'mouse':
-      case 'pen':
-        onMouseMove(event);
-        break;
-      // TODO touch
-    }
-  }
-
-  function onPointerUp(event) {
-    if (scope.enabled === false) return;
-
-    switch (event.pointerType) {
-      case 'mouse':
-      case 'pen':
-        onMouseUp(event);
-        break;
-      // TODO touch
-    }
-  }
-
-  function keydown(event) {
-    if (scope.enabled === false) return;
-    window.removeEventListener('keydown', keydown);
-
-    if (_keyState !== STATE.NONE) {
-      return;
-    } else if (event.keyCode === scope.keys[STATE.ROTATE] && !scope.noRotate) {
-      _keyState = STATE.ROTATE;
-    } else if (event.keyCode === scope.keys[STATE.ZOOM] && !scope.noZoom) {
-      _keyState = STATE.ZOOM;
-    } else if (event.keyCode === scope.keys[STATE.PAN] && !scope.noPan) {
-      _keyState = STATE.PAN;
-    }
-  }
-
-  function keyup() {
-    if (scope.enabled === false) return;
-    _keyState = STATE.NONE;
-    window.addEventListener('keydown', keydown, false);
-  }
-
-  function onMouseDown(event) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (_state === STATE.NONE) {
-      switch (event.button) {
-        case scope.mouseButtons.LEFT:
-          _state = STATE.ROTATE;
-          break;
-
-        case scope.mouseButtons.MIDDLE:
-          _state = STATE.ZOOM;
-          break;
-
-        case scope.mouseButtons.RIGHT:
-          _state = STATE.PAN;
-          break;
-
-        default:
-          _state = STATE.NONE;
-      }
-    }
-
-    var state = _keyState !== STATE.NONE ? _keyState : _state;
-
-    if (state === STATE.ROTATE && !scope.noRotate) {
-      _moveCurr.copy(getMouseOnCircle(event.pageX, event.pageY));
-
-      _movePrev.copy(_moveCurr);
-    } else if (state === STATE.ZOOM && !scope.noZoom) {
-      _zoomStart.copy(getMouseOnScreen(event.pageX, event.pageY));
-
-      _zoomEnd.copy(_zoomStart);
-    } else if (state === STATE.PAN && !scope.noPan) {
-      _panStart.copy(getMouseOnScreen(event.pageX, event.pageY));
-
-      _panEnd.copy(_panStart);
-    }
-
-    scope.domElement.ownerDocument.addEventListener('pointermove', onPointerMove, false);
-    scope.domElement.ownerDocument.addEventListener('pointerup', onPointerUp, false);
-    scope.dispatchEvent(startEvent);
-  }
-
-  function onMouseMove(event) {
-    if (scope.enabled === false) return;
-    event.preventDefault();
-    event.stopPropagation();
-    var state = _keyState !== STATE.NONE ? _keyState : _state;
-
-    if (state === STATE.ROTATE && !scope.noRotate) {
-      _movePrev.copy(_moveCurr);
-
-      _moveCurr.copy(getMouseOnCircle(event.pageX, event.pageY));
-    } else if (state === STATE.ZOOM && !scope.noZoom) {
-      _zoomEnd.copy(getMouseOnScreen(event.pageX, event.pageY));
-    } else if (state === STATE.PAN && !scope.noPan) {
-      _panEnd.copy(getMouseOnScreen(event.pageX, event.pageY));
-    }
-  }
-
-  function onMouseUp(event) {
-    if (scope.enabled === false) return;
-    event.preventDefault();
-    event.stopPropagation();
-    _state = STATE.NONE;
-    scope.domElement.ownerDocument.removeEventListener('pointermove', onPointerMove);
-    scope.domElement.ownerDocument.removeEventListener('pointerup', onPointerUp);
-    scope.dispatchEvent(endEvent);
-  }
-
-  function mousewheel(event) {
-    if (scope.enabled === false) return;
-    if (scope.noZoom === true) return;
-    event.preventDefault();
-    event.stopPropagation();
-
-    switch (event.deltaMode) {
-      case 2:
-        // Zoom in pages
-        _zoomStart.y -= event.deltaY * 0.025;
-        break;
-
-      case 1:
-        // Zoom in lines
-        _zoomStart.y -= event.deltaY * 0.01;
-        break;
-
-      default:
-        // undefined, 0, assume pixels
-        _zoomStart.y -= event.deltaY * 0.00025;
-        break;
-    }
-
-    scope.dispatchEvent(startEvent);
-    scope.dispatchEvent(endEvent);
-  }
-
-  function touchstart(event) {
-    if (scope.enabled === false) return;
-    event.preventDefault();
-
-    switch (event.touches.length) {
-      case 1:
-        _state = STATE.TOUCH_ROTATE;
-
-        _moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY));
-
-        _movePrev.copy(_moveCurr);
-
-        break;
-
-      default:
-        // 2 or more
-        _state = STATE.TOUCH_ZOOM_PAN;
-        var dx = event.touches[0].pageX - event.touches[1].pageX;
-        var dy = event.touches[0].pageY - event.touches[1].pageY;
-        _touchZoomDistanceEnd = _touchZoomDistanceStart = Math.sqrt(dx * dx + dy * dy);
-        var x = (event.touches[0].pageX + event.touches[1].pageX) / 2;
-        var y = (event.touches[0].pageY + event.touches[1].pageY) / 2;
-
-        _panStart.copy(getMouseOnScreen(x, y));
-
-        _panEnd.copy(_panStart);
-
-        break;
-    }
-
-    scope.dispatchEvent(startEvent);
-  }
-
-  function touchmove(event) {
-    if (scope.enabled === false) return;
-    event.preventDefault();
-    event.stopPropagation();
-
-    switch (event.touches.length) {
-      case 1:
-        _movePrev.copy(_moveCurr);
-
-        _moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY));
-
-        break;
-
-      default:
-        // 2 or more
-        var dx = event.touches[0].pageX - event.touches[1].pageX;
-        var dy = event.touches[0].pageY - event.touches[1].pageY;
-        _touchZoomDistanceEnd = Math.sqrt(dx * dx + dy * dy);
-        var x = (event.touches[0].pageX + event.touches[1].pageX) / 2;
-        var y = (event.touches[0].pageY + event.touches[1].pageY) / 2;
-
-        _panEnd.copy(getMouseOnScreen(x, y));
-
-        break;
-    }
-  }
-
-  function touchend(event) {
-    if (scope.enabled === false) return;
-
-    switch (event.touches.length) {
-      case 0:
-        _state = STATE.NONE;
-        break;
-
-      case 1:
-        _state = STATE.TOUCH_ROTATE;
-
-        _moveCurr.copy(getMouseOnCircle(event.touches[0].pageX, event.touches[0].pageY));
-
-        _movePrev.copy(_moveCurr);
-
-        break;
-    }
-
-    scope.dispatchEvent(endEvent);
-  }
-
-  function contextmenu(event) {
-    if (scope.enabled === false) return;
-    event.preventDefault();
-  }
-
-  this.dispose = function () {
-    scope.domElement.removeEventListener('contextmenu', contextmenu, false);
-    scope.domElement.removeEventListener('pointerdown', onPointerDown, false);
-    scope.domElement.removeEventListener('wheel', mousewheel, false);
-    scope.domElement.removeEventListener('touchstart', touchstart, false);
-    scope.domElement.removeEventListener('touchend', touchend, false);
-    scope.domElement.removeEventListener('touchmove', touchmove, false);
-    scope.domElement.ownerDocument.removeEventListener('pointermove', onPointerMove, false);
-    scope.domElement.ownerDocument.removeEventListener('pointerup', onPointerUp, false);
-    window.removeEventListener('keydown', keydown, false);
-    window.removeEventListener('keyup', keyup, false);
-  };
-
-  this.domElement.addEventListener('contextmenu', contextmenu, false);
-  this.domElement.addEventListener('pointerdown', onPointerDown, false);
-  this.domElement.addEventListener('wheel', mousewheel, false);
-  this.domElement.addEventListener('touchstart', touchstart, false);
-  this.domElement.addEventListener('touchend', touchend, false);
-  this.domElement.addEventListener('touchmove', touchmove, false);
-  this.domElement.ownerDocument.addEventListener('pointermove', onPointerMove, false);
-  this.domElement.ownerDocument.addEventListener('pointerup', onPointerUp, false);
-  window.addEventListener('keydown', keydown, false);
-  window.addEventListener('keyup', keyup, false);
-  this.handleResize(); // force an update at start
-
-  this.update();
-};
-
-TrackballControls.prototype = Object.create(EventDispatcher.prototype);
-TrackballControls.prototype.constructor = TrackballControls;
-
-var N = 20;
-console.log('we start');
-
-var arcsData = _toConsumableArray$4(Array(N).keys()).map(function () {
-  return {
-    startLat: (Math.random() - 0.5) * 180,
-    startLng: (Math.random() - 0.5) * 360,
-    endLat: (Math.random() - 0.5) * 180,
-    endLng: (Math.random() - 0.5) * 360,
-    color: ['rgb(249, 242, 149)', 'rgb(224, 170, 62)', 'rgb(249, 242, 149)', 'rgb(224, 170, 62)'][Math.round(Math.random() * 3)]
-  };
-});
-
-var Globe = new threeGlobe().globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg').arcsData(arcsData).arcColor('color').arcDashLength(0.4).arcDashGap(4).arcDashInitialGap(function () {
-  return Math.random() * 5;
-}).arcDashAnimateTime(1000); // Setup renderer
-
-var renderer = new WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById('globeViz').appendChild(renderer.domElement); // Setup scene
-
-var scene = new Scene();
-scene.add(Globe);
-var ambientLight = new AmbientLight(0xffffff);
-scene.add(ambientLight);
-var directionalLight = new DirectionalLight(0xffffff, 0.6);
-scene.add(directionalLight); // Setup camera
+const _lut = [];
+
+for ( let i = 0; i < 256; i ++ ) {
+
+	_lut[ i ] = ( i < 16 ? '0' : '' ) + ( i ).toString( 16 );
+
+}
+
+function clamp( value, min, max ) {
+
+	return Math.max( min, Math.min( max, value ) );
+
+}
+
+// compute euclidian modulo of m % n
+// https://en.wikipedia.org/wiki/Modulo_operation
+function euclideanModulo( n, m ) {
+
+	return ( ( n % m ) + m ) % m;
+
+}
+
+// https://en.wikipedia.org/wiki/Linear_interpolation
+function lerp( x, y, t ) {
+
+	return ( 1 - t ) * x + t * y;
+
+}
+
+const _colorKeywords = { 'aliceblue': 0xF0F8FF, 'antiquewhite': 0xFAEBD7, 'aqua': 0x00FFFF, 'aquamarine': 0x7FFFD4, 'azure': 0xF0FFFF,
+	'beige': 0xF5F5DC, 'bisque': 0xFFE4C4, 'black': 0x000000, 'blanchedalmond': 0xFFEBCD, 'blue': 0x0000FF, 'blueviolet': 0x8A2BE2,
+	'brown': 0xA52A2A, 'burlywood': 0xDEB887, 'cadetblue': 0x5F9EA0, 'chartreuse': 0x7FFF00, 'chocolate': 0xD2691E, 'coral': 0xFF7F50,
+	'cornflowerblue': 0x6495ED, 'cornsilk': 0xFFF8DC, 'crimson': 0xDC143C, 'cyan': 0x00FFFF, 'darkblue': 0x00008B, 'darkcyan': 0x008B8B,
+	'darkgoldenrod': 0xB8860B, 'darkgray': 0xA9A9A9, 'darkgreen': 0x006400, 'darkgrey': 0xA9A9A9, 'darkkhaki': 0xBDB76B, 'darkmagenta': 0x8B008B,
+	'darkolivegreen': 0x556B2F, 'darkorange': 0xFF8C00, 'darkorchid': 0x9932CC, 'darkred': 0x8B0000, 'darksalmon': 0xE9967A, 'darkseagreen': 0x8FBC8F,
+	'darkslateblue': 0x483D8B, 'darkslategray': 0x2F4F4F, 'darkslategrey': 0x2F4F4F, 'darkturquoise': 0x00CED1, 'darkviolet': 0x9400D3,
+	'deeppink': 0xFF1493, 'deepskyblue': 0x00BFFF, 'dimgray': 0x696969, 'dimgrey': 0x696969, 'dodgerblue': 0x1E90FF, 'firebrick': 0xB22222,
+	'floralwhite': 0xFFFAF0, 'forestgreen': 0x228B22, 'fuchsia': 0xFF00FF, 'gainsboro': 0xDCDCDC, 'ghostwhite': 0xF8F8FF, 'gold': 0xFFD700,
+	'goldenrod': 0xDAA520, 'gray': 0x808080, 'green': 0x008000, 'greenyellow': 0xADFF2F, 'grey': 0x808080, 'honeydew': 0xF0FFF0, 'hotpink': 0xFF69B4,
+	'indianred': 0xCD5C5C, 'indigo': 0x4B0082, 'ivory': 0xFFFFF0, 'khaki': 0xF0E68C, 'lavender': 0xE6E6FA, 'lavenderblush': 0xFFF0F5, 'lawngreen': 0x7CFC00,
+	'lemonchiffon': 0xFFFACD, 'lightblue': 0xADD8E6, 'lightcoral': 0xF08080, 'lightcyan': 0xE0FFFF, 'lightgoldenrodyellow': 0xFAFAD2, 'lightgray': 0xD3D3D3,
+	'lightgreen': 0x90EE90, 'lightgrey': 0xD3D3D3, 'lightpink': 0xFFB6C1, 'lightsalmon': 0xFFA07A, 'lightseagreen': 0x20B2AA, 'lightskyblue': 0x87CEFA,
+	'lightslategray': 0x778899, 'lightslategrey': 0x778899, 'lightsteelblue': 0xB0C4DE, 'lightyellow': 0xFFFFE0, 'lime': 0x00FF00, 'limegreen': 0x32CD32,
+	'linen': 0xFAF0E6, 'magenta': 0xFF00FF, 'maroon': 0x800000, 'mediumaquamarine': 0x66CDAA, 'mediumblue': 0x0000CD, 'mediumorchid': 0xBA55D3,
+	'mediumpurple': 0x9370DB, 'mediumseagreen': 0x3CB371, 'mediumslateblue': 0x7B68EE, 'mediumspringgreen': 0x00FA9A, 'mediumturquoise': 0x48D1CC,
+	'mediumvioletred': 0xC71585, 'midnightblue': 0x191970, 'mintcream': 0xF5FFFA, 'mistyrose': 0xFFE4E1, 'moccasin': 0xFFE4B5, 'navajowhite': 0xFFDEAD,
+	'navy': 0x000080, 'oldlace': 0xFDF5E6, 'olive': 0x808000, 'olivedrab': 0x6B8E23, 'orange': 0xFFA500, 'orangered': 0xFF4500, 'orchid': 0xDA70D6,
+	'palegoldenrod': 0xEEE8AA, 'palegreen': 0x98FB98, 'paleturquoise': 0xAFEEEE, 'palevioletred': 0xDB7093, 'papayawhip': 0xFFEFD5, 'peachpuff': 0xFFDAB9,
+	'peru': 0xCD853F, 'pink': 0xFFC0CB, 'plum': 0xDDA0DD, 'powderblue': 0xB0E0E6, 'purple': 0x800080, 'rebeccapurple': 0x663399, 'red': 0xFF0000, 'rosybrown': 0xBC8F8F,
+	'royalblue': 0x4169E1, 'saddlebrown': 0x8B4513, 'salmon': 0xFA8072, 'sandybrown': 0xF4A460, 'seagreen': 0x2E8B57, 'seashell': 0xFFF5EE,
+	'sienna': 0xA0522D, 'silver': 0xC0C0C0, 'skyblue': 0x87CEEB, 'slateblue': 0x6A5ACD, 'slategray': 0x708090, 'slategrey': 0x708090, 'snow': 0xFFFAFA,
+	'springgreen': 0x00FF7F, 'steelblue': 0x4682B4, 'tan': 0xD2B48C, 'teal': 0x008080, 'thistle': 0xD8BFD8, 'tomato': 0xFF6347, 'turquoise': 0x40E0D0,
+	'violet': 0xEE82EE, 'wheat': 0xF5DEB3, 'white': 0xFFFFFF, 'whitesmoke': 0xF5F5F5, 'yellow': 0xFFFF00, 'yellowgreen': 0x9ACD32 };
+
+const _hslA = { h: 0, s: 0, l: 0 };
+const _hslB = { h: 0, s: 0, l: 0 };
+
+function hue2rgb( p, q, t ) {
+
+	if ( t < 0 ) t += 1;
+	if ( t > 1 ) t -= 1;
+	if ( t < 1 / 6 ) return p + ( q - p ) * 6 * t;
+	if ( t < 1 / 2 ) return q;
+	if ( t < 2 / 3 ) return p + ( q - p ) * 6 * ( 2 / 3 - t );
+	return p;
+
+}
+
+function SRGBToLinear( c ) {
+
+	return ( c < 0.04045 ) ? c * 0.0773993808 : Math.pow( c * 0.9478672986 + 0.0521327014, 2.4 );
+
+}
+
+function LinearToSRGB( c ) {
+
+	return ( c < 0.0031308 ) ? c * 12.92 : 1.055 * ( Math.pow( c, 0.41666 ) ) - 0.055;
+
+}
+
+class Color {
+
+	constructor( r, g, b ) {
+
+		if ( g === undefined && b === undefined ) {
+
+			// r is THREE.Color, hex or string
+			return this.set( r );
+
+		}
+
+		return this.setRGB( r, g, b );
+
+	}
+
+	set( value ) {
+
+		if ( value && value.isColor ) {
+
+			this.copy( value );
+
+		} else if ( typeof value === 'number' ) {
+
+			this.setHex( value );
+
+		} else if ( typeof value === 'string' ) {
+
+			this.setStyle( value );
+
+		}
+
+		return this;
+
+	}
+
+	setScalar( scalar ) {
+
+		this.r = scalar;
+		this.g = scalar;
+		this.b = scalar;
+
+		return this;
+
+	}
+
+	setHex( hex ) {
+
+		hex = Math.floor( hex );
+
+		this.r = ( hex >> 16 & 255 ) / 255;
+		this.g = ( hex >> 8 & 255 ) / 255;
+		this.b = ( hex & 255 ) / 255;
+
+		return this;
+
+	}
+
+	setRGB( r, g, b ) {
+
+		this.r = r;
+		this.g = g;
+		this.b = b;
+
+		return this;
+
+	}
+
+	setHSL( h, s, l ) {
+
+		// h,s,l ranges are in 0.0 - 1.0
+		h = euclideanModulo( h, 1 );
+		s = clamp( s, 0, 1 );
+		l = clamp( l, 0, 1 );
+
+		if ( s === 0 ) {
+
+			this.r = this.g = this.b = l;
+
+		} else {
+
+			const p = l <= 0.5 ? l * ( 1 + s ) : l + s - ( l * s );
+			const q = ( 2 * l ) - p;
+
+			this.r = hue2rgb( q, p, h + 1 / 3 );
+			this.g = hue2rgb( q, p, h );
+			this.b = hue2rgb( q, p, h - 1 / 3 );
+
+		}
+
+		return this;
+
+	}
+
+	setStyle( style ) {
+
+		function handleAlpha( string ) {
+
+			if ( string === undefined ) return;
+
+			if ( parseFloat( string ) < 1 ) {
+
+				console.warn( 'THREE.Color: Alpha component of ' + style + ' will be ignored.' );
+
+			}
+
+		}
+
+
+		let m;
+
+		if ( m = /^((?:rgb|hsl)a?)\(([^\)]*)\)/.exec( style ) ) {
+
+			// rgb / hsl
+
+			let color;
+			const name = m[ 1 ];
+			const components = m[ 2 ];
+
+			switch ( name ) {
+
+				case 'rgb':
+				case 'rgba':
+
+					if ( color = /^\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec( components ) ) {
+
+						// rgb(255,0,0) rgba(255,0,0,0.5)
+						this.r = Math.min( 255, parseInt( color[ 1 ], 10 ) ) / 255;
+						this.g = Math.min( 255, parseInt( color[ 2 ], 10 ) ) / 255;
+						this.b = Math.min( 255, parseInt( color[ 3 ], 10 ) ) / 255;
+
+						handleAlpha( color[ 4 ] );
+
+						return this;
+
+					}
+
+					if ( color = /^\s*(\d+)\%\s*,\s*(\d+)\%\s*,\s*(\d+)\%\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec( components ) ) {
+
+						// rgb(100%,0%,0%) rgba(100%,0%,0%,0.5)
+						this.r = Math.min( 100, parseInt( color[ 1 ], 10 ) ) / 100;
+						this.g = Math.min( 100, parseInt( color[ 2 ], 10 ) ) / 100;
+						this.b = Math.min( 100, parseInt( color[ 3 ], 10 ) ) / 100;
+
+						handleAlpha( color[ 4 ] );
+
+						return this;
+
+					}
+
+					break;
+
+				case 'hsl':
+				case 'hsla':
+
+					if ( color = /^\s*(\d*\.?\d+)\s*,\s*(\d+)\%\s*,\s*(\d+)\%\s*(?:,\s*(\d*\.?\d+)\s*)?$/.exec( components ) ) {
+
+						// hsl(120,50%,50%) hsla(120,50%,50%,0.5)
+						const h = parseFloat( color[ 1 ] ) / 360;
+						const s = parseInt( color[ 2 ], 10 ) / 100;
+						const l = parseInt( color[ 3 ], 10 ) / 100;
+
+						handleAlpha( color[ 4 ] );
+
+						return this.setHSL( h, s, l );
+
+					}
+
+					break;
+
+			}
+
+		} else if ( m = /^\#([A-Fa-f\d]+)$/.exec( style ) ) {
+
+			// hex color
+
+			const hex = m[ 1 ];
+			const size = hex.length;
+
+			if ( size === 3 ) {
+
+				// #ff0
+				this.r = parseInt( hex.charAt( 0 ) + hex.charAt( 0 ), 16 ) / 255;
+				this.g = parseInt( hex.charAt( 1 ) + hex.charAt( 1 ), 16 ) / 255;
+				this.b = parseInt( hex.charAt( 2 ) + hex.charAt( 2 ), 16 ) / 255;
+
+				return this;
+
+			} else if ( size === 6 ) {
+
+				// #ff0000
+				this.r = parseInt( hex.charAt( 0 ) + hex.charAt( 1 ), 16 ) / 255;
+				this.g = parseInt( hex.charAt( 2 ) + hex.charAt( 3 ), 16 ) / 255;
+				this.b = parseInt( hex.charAt( 4 ) + hex.charAt( 5 ), 16 ) / 255;
+
+				return this;
+
+			}
+
+		}
+
+		if ( style && style.length > 0 ) {
+
+			return this.setColorName( style );
+
+		}
+
+		return this;
+
+	}
+
+	setColorName( style ) {
+
+		// color keywords
+		const hex = _colorKeywords[ style.toLowerCase() ];
+
+		if ( hex !== undefined ) {
+
+			// red
+			this.setHex( hex );
+
+		} else {
+
+			// unknown color
+			console.warn( 'THREE.Color: Unknown color ' + style );
+
+		}
+
+		return this;
+
+	}
+
+	clone() {
+
+		return new this.constructor( this.r, this.g, this.b );
+
+	}
+
+	copy( color ) {
+
+		this.r = color.r;
+		this.g = color.g;
+		this.b = color.b;
+
+		return this;
+
+	}
+
+	copyGammaToLinear( color, gammaFactor = 2.0 ) {
+
+		this.r = Math.pow( color.r, gammaFactor );
+		this.g = Math.pow( color.g, gammaFactor );
+		this.b = Math.pow( color.b, gammaFactor );
+
+		return this;
+
+	}
+
+	copyLinearToGamma( color, gammaFactor = 2.0 ) {
+
+		const safeInverse = ( gammaFactor > 0 ) ? ( 1.0 / gammaFactor ) : 1.0;
+
+		this.r = Math.pow( color.r, safeInverse );
+		this.g = Math.pow( color.g, safeInverse );
+		this.b = Math.pow( color.b, safeInverse );
+
+		return this;
+
+	}
+
+	convertGammaToLinear( gammaFactor ) {
+
+		this.copyGammaToLinear( this, gammaFactor );
+
+		return this;
+
+	}
+
+	convertLinearToGamma( gammaFactor ) {
+
+		this.copyLinearToGamma( this, gammaFactor );
+
+		return this;
+
+	}
+
+	copySRGBToLinear( color ) {
+
+		this.r = SRGBToLinear( color.r );
+		this.g = SRGBToLinear( color.g );
+		this.b = SRGBToLinear( color.b );
+
+		return this;
+
+	}
+
+	copyLinearToSRGB( color ) {
+
+		this.r = LinearToSRGB( color.r );
+		this.g = LinearToSRGB( color.g );
+		this.b = LinearToSRGB( color.b );
+
+		return this;
+
+	}
+
+	convertSRGBToLinear() {
+
+		this.copySRGBToLinear( this );
+
+		return this;
+
+	}
+
+	convertLinearToSRGB() {
+
+		this.copyLinearToSRGB( this );
+
+		return this;
+
+	}
+
+	getHex() {
+
+		return ( this.r * 255 ) << 16 ^ ( this.g * 255 ) << 8 ^ ( this.b * 255 ) << 0;
+
+	}
+
+	getHexString() {
+
+		return ( '000000' + this.getHex().toString( 16 ) ).slice( - 6 );
+
+	}
+
+	getHSL( target ) {
+
+		// h,s,l ranges are in 0.0 - 1.0
+
+		if ( target === undefined ) {
+
+			console.warn( 'THREE.Color: .getHSL() target is now required' );
+			target = { h: 0, s: 0, l: 0 };
+
+		}
+
+		const r = this.r, g = this.g, b = this.b;
+
+		const max = Math.max( r, g, b );
+		const min = Math.min( r, g, b );
+
+		let hue, saturation;
+		const lightness = ( min + max ) / 2.0;
+
+		if ( min === max ) {
+
+			hue = 0;
+			saturation = 0;
+
+		} else {
+
+			const delta = max - min;
+
+			saturation = lightness <= 0.5 ? delta / ( max + min ) : delta / ( 2 - max - min );
+
+			switch ( max ) {
+
+				case r: hue = ( g - b ) / delta + ( g < b ? 6 : 0 ); break;
+				case g: hue = ( b - r ) / delta + 2; break;
+				case b: hue = ( r - g ) / delta + 4; break;
+
+			}
+
+			hue /= 6;
+
+		}
+
+		target.h = hue;
+		target.s = saturation;
+		target.l = lightness;
+
+		return target;
+
+	}
+
+	getStyle() {
+
+		return 'rgb(' + ( ( this.r * 255 ) | 0 ) + ',' + ( ( this.g * 255 ) | 0 ) + ',' + ( ( this.b * 255 ) | 0 ) + ')';
+
+	}
+
+	offsetHSL( h, s, l ) {
+
+		this.getHSL( _hslA );
+
+		_hslA.h += h; _hslA.s += s; _hslA.l += l;
+
+		this.setHSL( _hslA.h, _hslA.s, _hslA.l );
+
+		return this;
+
+	}
+
+	add( color ) {
+
+		this.r += color.r;
+		this.g += color.g;
+		this.b += color.b;
+
+		return this;
+
+	}
+
+	addColors( color1, color2 ) {
+
+		this.r = color1.r + color2.r;
+		this.g = color1.g + color2.g;
+		this.b = color1.b + color2.b;
+
+		return this;
+
+	}
+
+	addScalar( s ) {
+
+		this.r += s;
+		this.g += s;
+		this.b += s;
+
+		return this;
+
+	}
+
+	sub( color ) {
+
+		this.r = Math.max( 0, this.r - color.r );
+		this.g = Math.max( 0, this.g - color.g );
+		this.b = Math.max( 0, this.b - color.b );
+
+		return this;
+
+	}
+
+	multiply( color ) {
+
+		this.r *= color.r;
+		this.g *= color.g;
+		this.b *= color.b;
+
+		return this;
+
+	}
+
+	multiplyScalar( s ) {
+
+		this.r *= s;
+		this.g *= s;
+		this.b *= s;
+
+		return this;
+
+	}
+
+	lerp( color, alpha ) {
+
+		this.r += ( color.r - this.r ) * alpha;
+		this.g += ( color.g - this.g ) * alpha;
+		this.b += ( color.b - this.b ) * alpha;
+
+		return this;
+
+	}
+
+	lerpColors( color1, color2, alpha ) {
+
+		this.r = color1.r + ( color2.r - color1.r ) * alpha;
+		this.g = color1.g + ( color2.g - color1.g ) * alpha;
+		this.b = color1.b + ( color2.b - color1.b ) * alpha;
+
+		return this;
+
+	}
+
+	lerpHSL( color, alpha ) {
+
+		this.getHSL( _hslA );
+		color.getHSL( _hslB );
+
+		const h = lerp( _hslA.h, _hslB.h, alpha );
+		const s = lerp( _hslA.s, _hslB.s, alpha );
+		const l = lerp( _hslA.l, _hslB.l, alpha );
+
+		this.setHSL( h, s, l );
+
+		return this;
+
+	}
+
+	equals( c ) {
+
+		return ( c.r === this.r ) && ( c.g === this.g ) && ( c.b === this.b );
+
+	}
+
+	fromArray( array, offset = 0 ) {
+
+		this.r = array[ offset ];
+		this.g = array[ offset + 1 ];
+		this.b = array[ offset + 2 ];
+
+		return this;
+
+	}
+
+	toArray( array = [], offset = 0 ) {
+
+		array[ offset ] = this.r;
+		array[ offset + 1 ] = this.g;
+		array[ offset + 2 ] = this.b;
+
+		return array;
+
+	}
+
+	fromBufferAttribute( attribute, index ) {
+
+		this.r = attribute.getX( index );
+		this.g = attribute.getY( index );
+		this.b = attribute.getZ( index );
+
+		if ( attribute.normalized === true ) {
+
+			// assuming Uint8Array
+
+			this.r /= 255;
+			this.g /= 255;
+			this.b /= 255;
+
+		}
+
+		return this;
+
+	}
+
+	toJSON() {
+
+		return this.getHex();
+
+	}
+
+}
+
+Color.NAMES = _colorKeywords;
+
+Color.prototype.isColor = true;
+Color.prototype.r = 1;
+Color.prototype.g = 1;
+Color.prototype.b = 1;
+
+//
+//import {WebGLRenderer, Scene, AmbientLight, DirectionalLight, PerspectiveCamera} from 'three';
+//import TrackballControls from 'three-trackballcontrols';
+//import * as TrackballControls from '.\node_modules\three\examples\js\controls\TrackballControls';
+//import TrackballControls from './TrackballControls';
+//import { TrackballControls } from '.\node_modules\three\examples\js\controls\TrackballControls'
 
 var camera = new PerspectiveCamera();
-camera.aspect = window.innerWidth / window.innerHeight;
-camera.updateProjectionMatrix();
-camera.position.z = 500; // Add camera controls
+var Globe = new threeGlobe();
+var renderer = new WebGLRenderer();
+var scene = new Scene();
+var N = 20;
+function init() {
+  console.log('init canvas');
 
-var tbControls = new TrackballControls(camera, renderer.domElement);
-tbControls.minDistance = 101;
-tbControls.rotateSpeed = 5; //tbControls.zoomSpeed = 0.8;
-// Kick-off renderer
+  var arcsData = _toConsumableArray$4(Array(N).keys()).map(function () {
+    return {
+      startLat: (Math.random() - 0.5) * 180,
+      startLng: (Math.random() - 0.5) * 360,
+      endLat: (Math.random() - 0.5) * 180,
+      endLng: (Math.random() - 0.5) * 360,
+      color: ['rgb(249, 242, 149)', 'rgb(224, 170, 62)', 'rgb(249, 242, 149)', 'rgb(224, 170, 62)'][Math.round(Math.random() * 3)]
+    };
+  });
 
-(function animate() {
-  // IIFE
-  // Frame cycle
-  tbControls.update();
-  renderer.render(scene, camera);
-  requestAnimationFrame(animate);
-})();
+  Globe.globeImageUrl('https://image.shutterstock.com/image-vector/gold-world-map-vector-600w-1294298026.jpg').arcsData(arcsData).arcColor('color').arcDashLength(0.4).arcDashGap(4).arcDashInitialGap(function () {
+    return Math.random() * 5;
+  }).arcDashAnimateTime(1000); // Setup renderer
 
-console.log('we end');
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.getElementById('globeViz').appendChild(renderer.domElement); // Setup scene
+
+  scene.add(Globe);
+  var root_style = getComputedStyle(document.body);
+  debugger;
+  var background_color = root_style.getPropertyValue('--clr-background');
+  background_color = 0x979797; //background_color.replace('#', '0x');
+
+  scene.background = new Color(background_color);
+  console.log(scene.background);
+  var ambientLight = new AmbientLight(0xf9f295);
+  scene.add(ambientLight);
+  var directionalLight = new DirectionalLight(0xf9f295, 0.8);
+  scene.add(directionalLight); //const pointLight = new THREE.PointLight( 0xffffff, 1, 10000 );
+  //pointLight
+  //pointLight.position.set( 250, 40, 250 );
+  //scene.add( pointLight );
+  // Setup camera
+
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  camera.position.z = 500;
+  document.body.onscroll = moveCameraOnScrool; // Add camera controls
+
+  /*const tbControls = new TrackballControls(camera, renderer.domElement);
+  tbControls.minDistance = 101;
+  tbControls.rotateSpeed = 5;
+  tbControls.zoomSpeed = 0.8;
+  tbControls.noPan = true;
+  tbControls.noZoom = true;*/
+  // Kick-off renderer
+
+  (function animate() {
+    // IIFE
+    // Frame cycle
+    //tbControls.update();
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  })();
+}
+
+function moveCameraOnScrool() {
+  var t = document.body.getBoundingClientRect().top;
+  console.log('t: ', t); //camera.position.x = t * -0.1;
+
+  camera.position.y = Math.max(t * 0.1, -190);
+  camera.position.z = t * -0.1 + 500;
+  camera.position.x = Math.min(t * -0.1, 190); //Globe.position.add(new THREE.Vector3(0,0,1));
+
+  Globe.rotation.set(0, t * 0.003, 0);
+}
+
+var typed = createCommonjsModule(function (module, exports) {
+/*!
+ * 
+ *   typed.js - A JavaScript Typing Animation Library
+ *   Author: Matt Boldt <me@mattboldt.com>
+ *   Version: v2.0.12
+ *   Url: https://github.com/mattboldt/typed.js
+ *   License(s): MIT
+ * 
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	module.exports = factory();
+})(commonjsGlobal, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _initializerJs = __webpack_require__(1);
+	
+	var _htmlParserJs = __webpack_require__(3);
+	
+	/**
+	 * Welcome to Typed.js!
+	 * @param {string} elementId HTML element ID _OR_ HTML element
+	 * @param {object} options options object
+	 * @returns {object} a new Typed object
+	 */
+	
+	var Typed = (function () {
+	  function Typed(elementId, options) {
+	    _classCallCheck(this, Typed);
+	
+	    // Initialize it up
+	    _initializerJs.initializer.load(this, options, elementId);
+	    // All systems go!
+	    this.begin();
+	  }
+	
+	  /**
+	   * Toggle start() and stop() of the Typed instance
+	   * @public
+	   */
+	
+	  _createClass(Typed, [{
+	    key: 'toggle',
+	    value: function toggle() {
+	      this.pause.status ? this.start() : this.stop();
+	    }
+	
+	    /**
+	     * Stop typing / backspacing and enable cursor blinking
+	     * @public
+	     */
+	  }, {
+	    key: 'stop',
+	    value: function stop() {
+	      if (this.typingComplete) return;
+	      if (this.pause.status) return;
+	      this.toggleBlinking(true);
+	      this.pause.status = true;
+	      this.options.onStop(this.arrayPos, this);
+	    }
+	
+	    /**
+	     * Start typing / backspacing after being stopped
+	     * @public
+	     */
+	  }, {
+	    key: 'start',
+	    value: function start() {
+	      if (this.typingComplete) return;
+	      if (!this.pause.status) return;
+	      this.pause.status = false;
+	      if (this.pause.typewrite) {
+	        this.typewrite(this.pause.curString, this.pause.curStrPos);
+	      } else {
+	        this.backspace(this.pause.curString, this.pause.curStrPos);
+	      }
+	      this.options.onStart(this.arrayPos, this);
+	    }
+	
+	    /**
+	     * Destroy this instance of Typed
+	     * @public
+	     */
+	  }, {
+	    key: 'destroy',
+	    value: function destroy() {
+	      this.reset(false);
+	      this.options.onDestroy(this);
+	    }
+	
+	    /**
+	     * Reset Typed and optionally restarts
+	     * @param {boolean} restart
+	     * @public
+	     */
+	  }, {
+	    key: 'reset',
+	    value: function reset() {
+	      var restart = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+	
+	      clearInterval(this.timeout);
+	      this.replaceText('');
+	      if (this.cursor && this.cursor.parentNode) {
+	        this.cursor.parentNode.removeChild(this.cursor);
+	        this.cursor = null;
+	      }
+	      this.strPos = 0;
+	      this.arrayPos = 0;
+	      this.curLoop = 0;
+	      if (restart) {
+	        this.insertCursor();
+	        this.options.onReset(this);
+	        this.begin();
+	      }
+	    }
+	
+	    /**
+	     * Begins the typing animation
+	     * @private
+	     */
+	  }, {
+	    key: 'begin',
+	    value: function begin() {
+	      var _this = this;
+	
+	      this.options.onBegin(this);
+	      this.typingComplete = false;
+	      this.shuffleStringsIfNeeded(this);
+	      this.insertCursor();
+	      if (this.bindInputFocusEvents) this.bindFocusEvents();
+	      this.timeout = setTimeout(function () {
+	        // Check if there is some text in the element, if yes start by backspacing the default message
+	        if (!_this.currentElContent || _this.currentElContent.length === 0) {
+	          _this.typewrite(_this.strings[_this.sequence[_this.arrayPos]], _this.strPos);
+	        } else {
+	          // Start typing
+	          _this.backspace(_this.currentElContent, _this.currentElContent.length);
+	        }
+	      }, this.startDelay);
+	    }
+	
+	    /**
+	     * Called for each character typed
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'typewrite',
+	    value: function typewrite(curString, curStrPos) {
+	      var _this2 = this;
+	
+	      if (this.fadeOut && this.el.classList.contains(this.fadeOutClass)) {
+	        this.el.classList.remove(this.fadeOutClass);
+	        if (this.cursor) this.cursor.classList.remove(this.fadeOutClass);
+	      }
+	
+	      var humanize = this.humanizer(this.typeSpeed);
+	      var numChars = 1;
+	
+	      if (this.pause.status === true) {
+	        this.setPauseStatus(curString, curStrPos, true);
+	        return;
+	      }
+	
+	      // contain typing function in a timeout humanize'd delay
+	      this.timeout = setTimeout(function () {
+	        // skip over any HTML chars
+	        curStrPos = _htmlParserJs.htmlParser.typeHtmlChars(curString, curStrPos, _this2);
+	
+	        var pauseTime = 0;
+	        var substr = curString.substr(curStrPos);
+	        // check for an escape character before a pause value
+	        // format: \^\d+ .. eg: ^1000 .. should be able to print the ^ too using ^^
+	        // single ^ are removed from string
+	        if (substr.charAt(0) === '^') {
+	          if (/^\^\d+/.test(substr)) {
+	            var skip = 1; // skip at least 1
+	            substr = /\d+/.exec(substr)[0];
+	            skip += substr.length;
+	            pauseTime = parseInt(substr);
+	            _this2.temporaryPause = true;
+	            _this2.options.onTypingPaused(_this2.arrayPos, _this2);
+	            // strip out the escape character and pause value so they're not printed
+	            curString = curString.substring(0, curStrPos) + curString.substring(curStrPos + skip);
+	            _this2.toggleBlinking(true);
+	          }
+	        }
+	
+	        // check for skip characters formatted as
+	        // "this is a `string to print NOW` ..."
+	        if (substr.charAt(0) === '`') {
+	          while (curString.substr(curStrPos + numChars).charAt(0) !== '`') {
+	            numChars++;
+	            if (curStrPos + numChars > curString.length) break;
+	          }
+	          // strip out the escape characters and append all the string in between
+	          var stringBeforeSkip = curString.substring(0, curStrPos);
+	          var stringSkipped = curString.substring(stringBeforeSkip.length + 1, curStrPos + numChars);
+	          var stringAfterSkip = curString.substring(curStrPos + numChars + 1);
+	          curString = stringBeforeSkip + stringSkipped + stringAfterSkip;
+	          numChars--;
+	        }
+	
+	        // timeout for any pause after a character
+	        _this2.timeout = setTimeout(function () {
+	          // Accounts for blinking while paused
+	          _this2.toggleBlinking(false);
+	
+	          // We're done with this sentence!
+	          if (curStrPos >= curString.length) {
+	            _this2.doneTyping(curString, curStrPos);
+	          } else {
+	            _this2.keepTyping(curString, curStrPos, numChars);
+	          }
+	          // end of character pause
+	          if (_this2.temporaryPause) {
+	            _this2.temporaryPause = false;
+	            _this2.options.onTypingResumed(_this2.arrayPos, _this2);
+	          }
+	        }, pauseTime);
+	
+	        // humanized value for typing
+	      }, humanize);
+	    }
+	
+	    /**
+	     * Continue to the next string & begin typing
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'keepTyping',
+	    value: function keepTyping(curString, curStrPos, numChars) {
+	      // call before functions if applicable
+	      if (curStrPos === 0) {
+	        this.toggleBlinking(false);
+	        this.options.preStringTyped(this.arrayPos, this);
+	      }
+	      // start typing each new char into existing string
+	      // curString: arg, this.el.html: original text inside element
+	      curStrPos += numChars;
+	      var nextString = curString.substr(0, curStrPos);
+	      this.replaceText(nextString);
+	      // loop the function
+	      this.typewrite(curString, curStrPos);
+	    }
+	
+	    /**
+	     * We're done typing the current string
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'doneTyping',
+	    value: function doneTyping(curString, curStrPos) {
+	      var _this3 = this;
+	
+	      // fires callback function
+	      this.options.onStringTyped(this.arrayPos, this);
+	      this.toggleBlinking(true);
+	      // is this the final string
+	      if (this.arrayPos === this.strings.length - 1) {
+	        // callback that occurs on the last typed string
+	        this.complete();
+	        // quit if we wont loop back
+	        if (this.loop === false || this.curLoop === this.loopCount) {
+	          return;
+	        }
+	      }
+	      this.timeout = setTimeout(function () {
+	        _this3.backspace(curString, curStrPos);
+	      }, this.backDelay);
+	    }
+	
+	    /**
+	     * Backspaces 1 character at a time
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @private
+	     */
+	  }, {
+	    key: 'backspace',
+	    value: function backspace(curString, curStrPos) {
+	      var _this4 = this;
+	
+	      if (this.pause.status === true) {
+	        this.setPauseStatus(curString, curStrPos, false);
+	        return;
+	      }
+	      if (this.fadeOut) return this.initFadeOut();
+	
+	      this.toggleBlinking(false);
+	      var humanize = this.humanizer(this.backSpeed);
+	
+	      this.timeout = setTimeout(function () {
+	        curStrPos = _htmlParserJs.htmlParser.backSpaceHtmlChars(curString, curStrPos, _this4);
+	        // replace text with base text + typed characters
+	        var curStringAtPosition = curString.substr(0, curStrPos);
+	        _this4.replaceText(curStringAtPosition);
+	
+	        // if smartBack is enabled
+	        if (_this4.smartBackspace) {
+	          // the remaining part of the current string is equal of the same part of the new string
+	          var nextString = _this4.strings[_this4.arrayPos + 1];
+	          if (nextString && curStringAtPosition === nextString.substr(0, curStrPos)) {
+	            _this4.stopNum = curStrPos;
+	          } else {
+	            _this4.stopNum = 0;
+	          }
+	        }
+	
+	        // if the number (id of character in current string) is
+	        // less than the stop number, keep going
+	        if (curStrPos > _this4.stopNum) {
+	          // subtract characters one by one
+	          curStrPos--;
+	          // loop the function
+	          _this4.backspace(curString, curStrPos);
+	        } else if (curStrPos <= _this4.stopNum) {
+	          // if the stop number has been reached, increase
+	          // array position to next string
+	          _this4.arrayPos++;
+	          // When looping, begin at the beginning after backspace complete
+	          if (_this4.arrayPos === _this4.strings.length) {
+	            _this4.arrayPos = 0;
+	            _this4.options.onLastStringBackspaced();
+	            _this4.shuffleStringsIfNeeded();
+	            _this4.begin();
+	          } else {
+	            _this4.typewrite(_this4.strings[_this4.sequence[_this4.arrayPos]], curStrPos);
+	          }
+	        }
+	        // humanized value for typing
+	      }, humanize);
+	    }
+	
+	    /**
+	     * Full animation is complete
+	     * @private
+	     */
+	  }, {
+	    key: 'complete',
+	    value: function complete() {
+	      this.options.onComplete(this);
+	      if (this.loop) {
+	        this.curLoop++;
+	      } else {
+	        this.typingComplete = true;
+	      }
+	    }
+	
+	    /**
+	     * Has the typing been stopped
+	     * @param {string} curString the current string in the strings array
+	     * @param {number} curStrPos the current position in the curString
+	     * @param {boolean} isTyping
+	     * @private
+	     */
+	  }, {
+	    key: 'setPauseStatus',
+	    value: function setPauseStatus(curString, curStrPos, isTyping) {
+	      this.pause.typewrite = isTyping;
+	      this.pause.curString = curString;
+	      this.pause.curStrPos = curStrPos;
+	    }
+	
+	    /**
+	     * Toggle the blinking cursor
+	     * @param {boolean} isBlinking
+	     * @private
+	     */
+	  }, {
+	    key: 'toggleBlinking',
+	    value: function toggleBlinking(isBlinking) {
+	      if (!this.cursor) return;
+	      // if in paused state, don't toggle blinking a 2nd time
+	      if (this.pause.status) return;
+	      if (this.cursorBlinking === isBlinking) return;
+	      this.cursorBlinking = isBlinking;
+	      if (isBlinking) {
+	        this.cursor.classList.add('typed-cursor--blink');
+	      } else {
+	        this.cursor.classList.remove('typed-cursor--blink');
+	      }
+	    }
+	
+	    /**
+	     * Speed in MS to type
+	     * @param {number} speed
+	     * @private
+	     */
+	  }, {
+	    key: 'humanizer',
+	    value: function humanizer(speed) {
+	      return Math.round(Math.random() * speed / 2) + speed;
+	    }
+	
+	    /**
+	     * Shuffle the sequence of the strings array
+	     * @private
+	     */
+	  }, {
+	    key: 'shuffleStringsIfNeeded',
+	    value: function shuffleStringsIfNeeded() {
+	      if (!this.shuffle) return;
+	      this.sequence = this.sequence.sort(function () {
+	        return Math.random() - 0.5;
+	      });
+	    }
+	
+	    /**
+	     * Adds a CSS class to fade out current string
+	     * @private
+	     */
+	  }, {
+	    key: 'initFadeOut',
+	    value: function initFadeOut() {
+	      var _this5 = this;
+	
+	      this.el.className += ' ' + this.fadeOutClass;
+	      if (this.cursor) this.cursor.className += ' ' + this.fadeOutClass;
+	      return setTimeout(function () {
+	        _this5.arrayPos++;
+	        _this5.replaceText('');
+	
+	        // Resets current string if end of loop reached
+	        if (_this5.strings.length > _this5.arrayPos) {
+	          _this5.typewrite(_this5.strings[_this5.sequence[_this5.arrayPos]], 0);
+	        } else {
+	          _this5.typewrite(_this5.strings[0], 0);
+	          _this5.arrayPos = 0;
+	        }
+	      }, this.fadeOutDelay);
+	    }
+	
+	    /**
+	     * Replaces current text in the HTML element
+	     * depending on element type
+	     * @param {string} str
+	     * @private
+	     */
+	  }, {
+	    key: 'replaceText',
+	    value: function replaceText(str) {
+	      if (this.attr) {
+	        this.el.setAttribute(this.attr, str);
+	      } else {
+	        if (this.isInput) {
+	          this.el.value = str;
+	        } else if (this.contentType === 'html') {
+	          this.el.innerHTML = str;
+	        } else {
+	          this.el.textContent = str;
+	        }
+	      }
+	    }
+	
+	    /**
+	     * If using input elements, bind focus in order to
+	     * start and stop the animation
+	     * @private
+	     */
+	  }, {
+	    key: 'bindFocusEvents',
+	    value: function bindFocusEvents() {
+	      var _this6 = this;
+	
+	      if (!this.isInput) return;
+	      this.el.addEventListener('focus', function (e) {
+	        _this6.stop();
+	      });
+	      this.el.addEventListener('blur', function (e) {
+	        if (_this6.el.value && _this6.el.value.length !== 0) {
+	          return;
+	        }
+	        _this6.start();
+	      });
+	    }
+	
+	    /**
+	     * On init, insert the cursor element
+	     * @private
+	     */
+	  }, {
+	    key: 'insertCursor',
+	    value: function insertCursor() {
+	      if (!this.showCursor) return;
+	      if (this.cursor) return;
+	      this.cursor = document.createElement('span');
+	      this.cursor.className = 'typed-cursor';
+	      this.cursor.setAttribute('aria-hidden', true);
+	      this.cursor.innerHTML = this.cursorChar;
+	      this.el.parentNode && this.el.parentNode.insertBefore(this.cursor, this.el.nextSibling);
+	    }
+	  }]);
+	
+	  return Typed;
+	})();
+	
+	exports['default'] = Typed;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var _defaultsJs = __webpack_require__(2);
+	
+	var _defaultsJs2 = _interopRequireDefault(_defaultsJs);
+	
+	/**
+	 * Initialize the Typed object
+	 */
+	
+	var Initializer = (function () {
+	  function Initializer() {
+	    _classCallCheck(this, Initializer);
+	  }
+	
+	  _createClass(Initializer, [{
+	    key: 'load',
+	
+	    /**
+	     * Load up defaults & options on the Typed instance
+	     * @param {Typed} self instance of Typed
+	     * @param {object} options options object
+	     * @param {string} elementId HTML element ID _OR_ instance of HTML element
+	     * @private
+	     */
+	
+	    value: function load(self, options, elementId) {
+	      // chosen element to manipulate text
+	      if (typeof elementId === 'string') {
+	        self.el = document.querySelector(elementId);
+	      } else {
+	        self.el = elementId;
+	      }
+	
+	      self.options = _extends({}, _defaultsJs2['default'], options);
+	
+	      // attribute to type into
+	      self.isInput = self.el.tagName.toLowerCase() === 'input';
+	      self.attr = self.options.attr;
+	      self.bindInputFocusEvents = self.options.bindInputFocusEvents;
+	
+	      // show cursor
+	      self.showCursor = self.isInput ? false : self.options.showCursor;
+	
+	      // custom cursor
+	      self.cursorChar = self.options.cursorChar;
+	
+	      // Is the cursor blinking
+	      self.cursorBlinking = true;
+	
+	      // text content of element
+	      self.elContent = self.attr ? self.el.getAttribute(self.attr) : self.el.textContent;
+	
+	      // html or plain text
+	      self.contentType = self.options.contentType;
+	
+	      // typing speed
+	      self.typeSpeed = self.options.typeSpeed;
+	
+	      // add a delay before typing starts
+	      self.startDelay = self.options.startDelay;
+	
+	      // backspacing speed
+	      self.backSpeed = self.options.backSpeed;
+	
+	      // only backspace what doesn't match the previous string
+	      self.smartBackspace = self.options.smartBackspace;
+	
+	      // amount of time to wait before backspacing
+	      self.backDelay = self.options.backDelay;
+	
+	      // Fade out instead of backspace
+	      self.fadeOut = self.options.fadeOut;
+	      self.fadeOutClass = self.options.fadeOutClass;
+	      self.fadeOutDelay = self.options.fadeOutDelay;
+	
+	      // variable to check whether typing is currently paused
+	      self.isPaused = false;
+	
+	      // input strings of text
+	      self.strings = self.options.strings.map(function (s) {
+	        return s.trim();
+	      });
+	
+	      // div containing strings
+	      if (typeof self.options.stringsElement === 'string') {
+	        self.stringsElement = document.querySelector(self.options.stringsElement);
+	      } else {
+	        self.stringsElement = self.options.stringsElement;
+	      }
+	
+	      if (self.stringsElement) {
+	        self.strings = [];
+	        self.stringsElement.style.display = 'none';
+	        var strings = Array.prototype.slice.apply(self.stringsElement.children);
+	        var stringsLength = strings.length;
+	
+	        if (stringsLength) {
+	          for (var i = 0; i < stringsLength; i += 1) {
+	            var stringEl = strings[i];
+	            self.strings.push(stringEl.innerHTML.trim());
+	          }
+	        }
+	      }
+	
+	      // character number position of current string
+	      self.strPos = 0;
+	
+	      // current array position
+	      self.arrayPos = 0;
+	
+	      // index of string to stop backspacing on
+	      self.stopNum = 0;
+	
+	      // Looping logic
+	      self.loop = self.options.loop;
+	      self.loopCount = self.options.loopCount;
+	      self.curLoop = 0;
+	
+	      // shuffle the strings
+	      self.shuffle = self.options.shuffle;
+	      // the order of strings
+	      self.sequence = [];
+	
+	      self.pause = {
+	        status: false,
+	        typewrite: true,
+	        curString: '',
+	        curStrPos: 0
+	      };
+	
+	      // When the typing is complete (when not looped)
+	      self.typingComplete = false;
+	
+	      // Set the order in which the strings are typed
+	      for (var i in self.strings) {
+	        self.sequence[i] = i;
+	      }
+	
+	      // If there is some text in the element
+	      self.currentElContent = this.getCurrentElContent(self);
+	
+	      self.autoInsertCss = self.options.autoInsertCss;
+	
+	      this.appendAnimationCss(self);
+	    }
+	  }, {
+	    key: 'getCurrentElContent',
+	    value: function getCurrentElContent(self) {
+	      var elContent = '';
+	      if (self.attr) {
+	        elContent = self.el.getAttribute(self.attr);
+	      } else if (self.isInput) {
+	        elContent = self.el.value;
+	      } else if (self.contentType === 'html') {
+	        elContent = self.el.innerHTML;
+	      } else {
+	        elContent = self.el.textContent;
+	      }
+	      return elContent;
+	    }
+	  }, {
+	    key: 'appendAnimationCss',
+	    value: function appendAnimationCss(self) {
+	      var cssDataName = 'data-typed-js-css';
+	      if (!self.autoInsertCss) {
+	        return;
+	      }
+	      if (!self.showCursor && !self.fadeOut) {
+	        return;
+	      }
+	      if (document.querySelector('[' + cssDataName + ']')) {
+	        return;
+	      }
+	
+	      var css = document.createElement('style');
+	      css.type = 'text/css';
+	      css.setAttribute(cssDataName, true);
+	
+	      var innerCss = '';
+	      if (self.showCursor) {
+	        innerCss += '\n        .typed-cursor{\n          opacity: 1;\n        }\n        .typed-cursor.typed-cursor--blink{\n          animation: typedjsBlink 0.7s infinite;\n          -webkit-animation: typedjsBlink 0.7s infinite;\n                  animation: typedjsBlink 0.7s infinite;\n        }\n        @keyframes typedjsBlink{\n          50% { opacity: 0.0; }\n        }\n        @-webkit-keyframes typedjsBlink{\n          0% { opacity: 1; }\n          50% { opacity: 0.0; }\n          100% { opacity: 1; }\n        }\n      ';
+	      }
+	      if (self.fadeOut) {
+	        innerCss += '\n        .typed-fade-out{\n          opacity: 0;\n          transition: opacity .25s;\n        }\n        .typed-cursor.typed-cursor--blink.typed-fade-out{\n          -webkit-animation: 0;\n          animation: 0;\n        }\n      ';
+	      }
+	      if (css.length === 0) {
+	        return;
+	      }
+	      css.innerHTML = innerCss;
+	      document.body.appendChild(css);
+	    }
+	  }]);
+	
+	  return Initializer;
+	})();
+	
+	exports['default'] = Initializer;
+	var initializer = new Initializer();
+	exports.initializer = initializer;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	var defaults = {
+	  /**
+	   * @property {array} strings strings to be typed
+	   * @property {string} stringsElement ID of element containing string children
+	   */
+	  strings: ['These are the default values...', 'You know what you should do?', 'Use your own!', 'Have a great day!'],
+	  stringsElement: null,
+	
+	  /**
+	   * @property {number} typeSpeed type speed in milliseconds
+	   */
+	  typeSpeed: 0,
+	
+	  /**
+	   * @property {number} startDelay time before typing starts in milliseconds
+	   */
+	  startDelay: 0,
+	
+	  /**
+	   * @property {number} backSpeed backspacing speed in milliseconds
+	   */
+	  backSpeed: 0,
+	
+	  /**
+	   * @property {boolean} smartBackspace only backspace what doesn't match the previous string
+	   */
+	  smartBackspace: true,
+	
+	  /**
+	   * @property {boolean} shuffle shuffle the strings
+	   */
+	  shuffle: false,
+	
+	  /**
+	   * @property {number} backDelay time before backspacing in milliseconds
+	   */
+	  backDelay: 700,
+	
+	  /**
+	   * @property {boolean} fadeOut Fade out instead of backspace
+	   * @property {string} fadeOutClass css class for fade animation
+	   * @property {boolean} fadeOutDelay Fade out delay in milliseconds
+	   */
+	  fadeOut: false,
+	  fadeOutClass: 'typed-fade-out',
+	  fadeOutDelay: 500,
+	
+	  /**
+	   * @property {boolean} loop loop strings
+	   * @property {number} loopCount amount of loops
+	   */
+	  loop: false,
+	  loopCount: Infinity,
+	
+	  /**
+	   * @property {boolean} showCursor show cursor
+	   * @property {string} cursorChar character for cursor
+	   * @property {boolean} autoInsertCss insert CSS for cursor and fadeOut into HTML <head>
+	   */
+	  showCursor: true,
+	  cursorChar: '|',
+	  autoInsertCss: true,
+	
+	  /**
+	   * @property {string} attr attribute for typing
+	   * Ex: input placeholder, value, or just HTML text
+	   */
+	  attr: null,
+	
+	  /**
+	   * @property {boolean} bindInputFocusEvents bind to focus and blur if el is text input
+	   */
+	  bindInputFocusEvents: false,
+	
+	  /**
+	   * @property {string} contentType 'html' or 'null' for plaintext
+	   */
+	  contentType: 'html',
+	
+	  /**
+	   * Before it begins typing
+	   * @param {Typed} self
+	   */
+	  onBegin: function onBegin(self) {},
+	
+	  /**
+	   * All typing is complete
+	   * @param {Typed} self
+	   */
+	  onComplete: function onComplete(self) {},
+	
+	  /**
+	   * Before each string is typed
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  preStringTyped: function preStringTyped(arrayPos, self) {},
+	
+	  /**
+	   * After each string is typed
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onStringTyped: function onStringTyped(arrayPos, self) {},
+	
+	  /**
+	   * During looping, after last string is typed
+	   * @param {Typed} self
+	   */
+	  onLastStringBackspaced: function onLastStringBackspaced(self) {},
+	
+	  /**
+	   * Typing has been stopped
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onTypingPaused: function onTypingPaused(arrayPos, self) {},
+	
+	  /**
+	   * Typing has been started after being stopped
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onTypingResumed: function onTypingResumed(arrayPos, self) {},
+	
+	  /**
+	   * After reset
+	   * @param {Typed} self
+	   */
+	  onReset: function onReset(self) {},
+	
+	  /**
+	   * After stop
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onStop: function onStop(arrayPos, self) {},
+	
+	  /**
+	   * After start
+	   * @param {number} arrayPos
+	   * @param {Typed} self
+	   */
+	  onStart: function onStart(arrayPos, self) {},
+	
+	  /**
+	   * After destroy
+	   * @param {Typed} self
+	   */
+	  onDestroy: function onDestroy(self) {}
+	};
+	
+	exports['default'] = defaults;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	
+	var HTMLParser = (function () {
+	  function HTMLParser() {
+	    _classCallCheck(this, HTMLParser);
+	  }
+	
+	  _createClass(HTMLParser, [{
+	    key: 'typeHtmlChars',
+	
+	    /**
+	     * Type HTML tags & HTML Characters
+	     * @param {string} curString Current string
+	     * @param {number} curStrPos Position in current string
+	     * @param {Typed} self instance of Typed
+	     * @returns {number} a new string position
+	     * @private
+	     */
+	
+	    value: function typeHtmlChars(curString, curStrPos, self) {
+	      if (self.contentType !== 'html') return curStrPos;
+	      var curChar = curString.substr(curStrPos).charAt(0);
+	      if (curChar === '<' || curChar === '&') {
+	        var endTag = '';
+	        if (curChar === '<') {
+	          endTag = '>';
+	        } else {
+	          endTag = ';';
+	        }
+	        while (curString.substr(curStrPos + 1).charAt(0) !== endTag) {
+	          curStrPos++;
+	          if (curStrPos + 1 > curString.length) {
+	            break;
+	          }
+	        }
+	        curStrPos++;
+	      }
+	      return curStrPos;
+	    }
+	
+	    /**
+	     * Backspace HTML tags and HTML Characters
+	     * @param {string} curString Current string
+	     * @param {number} curStrPos Position in current string
+	     * @param {Typed} self instance of Typed
+	     * @returns {number} a new string position
+	     * @private
+	     */
+	  }, {
+	    key: 'backSpaceHtmlChars',
+	    value: function backSpaceHtmlChars(curString, curStrPos, self) {
+	      if (self.contentType !== 'html') return curStrPos;
+	      var curChar = curString.substr(curStrPos).charAt(0);
+	      if (curChar === '>' || curChar === ';') {
+	        var endTag = '';
+	        if (curChar === '>') {
+	          endTag = '<';
+	        } else {
+	          endTag = '&';
+	        }
+	        while (curString.substr(curStrPos - 1).charAt(0) !== endTag) {
+	          curStrPos--;
+	          if (curStrPos < 0) {
+	            break;
+	          }
+	        }
+	        curStrPos--;
+	      }
+	      return curStrPos;
+	    }
+	  }]);
+	
+	  return HTMLParser;
+	})();
+	
+	exports['default'] = HTMLParser;
+	var htmlParser = new HTMLParser();
+	exports.htmlParser = htmlParser;
+
+/***/ })
+/******/ ])
+});
+});
+
+var Typed = unwrapExports(typed);
+
+var options = {
+  strings: ['גם אתם רוצים נוככות ^100דיגיטאלית?', 'גם אתם רוצים נוכחות דיגיטאלית!'],
+  typeSpeed: 40,
+  backSpeed: 80,
+  backDelay: 1000
+};
+new Typed('#title_1', options);
+init();
