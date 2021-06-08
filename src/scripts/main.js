@@ -1,12 +1,20 @@
 import * as threeImp from './three/mainThreejs.js';
 import Typed from 'typed.js';
+
 var options = {
   strings: ['גם אתם רוצים נוככות ^100דיגיטאלית?',
             'גם אתם רוצים נוכחות דיגיטאלית!'],
   typeSpeed: 40,
   backSpeed: 80,
   backDelay: 1000,
+  onComplete: (typedEl) => {
+    var sections = document.querySelectorAll('main .section');
+    for(let i = 0; i < sections.length; i++) {
+      sections[i].classList.remove('d-hidden');
+    }
+  },
 };
-
-var typed = new Typed('#title_1', options);
 threeImp.init();
+var typed = new Typed('#title_1', options);
+document.body.classList.remove('loading');
+document.body.classList.add('done');

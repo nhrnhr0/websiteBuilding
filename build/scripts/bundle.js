@@ -71628,10 +71628,17 @@ Color.prototype.b = 1;
 
 var camera = new PerspectiveCamera();
 var Globe = new threeGlobe();
-var renderer = new WebGLRenderer();
+var renderer = new WebGLRenderer({
+  alpha: true
+});
 var scene = new Scene();
 var N = 20;
 function init() {
+  var loader = new TextureLoader();
+  loader.load('bg_image.jpg', function (texture) {
+    texture.app;
+    scene.background = texture;
+  });
   console.log('init canvas');
 
   var arcsData = _toConsumableArray$4(Array(N).keys()).map(function () {
@@ -71651,14 +71658,13 @@ function init() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById('globeViz').appendChild(renderer.domElement); // Setup scene
 
-  scene.add(Globe);
-  var root_style = getComputedStyle(document.body);
-  debugger;
-  var background_color = root_style.getPropertyValue('--clr-background');
-  background_color = 0x979797; //background_color.replace('#', '0x');
+  scene.add(Globe); //var root_style = getComputedStyle(document.body)
+  //var background_color = root_style.getPropertyValue('--clr-background');
+  //background_color = 0x979797;//background_color.replace('#', '0x');
+  //scene.background = new THREE.Color(background_color);
+  //console.log(scene.background);
 
-  scene.background = new Color(background_color);
-  console.log(scene.background);
+  scene.background = new Color(0x97979797);
   var ambientLight = new AmbientLight(0xf9f295);
   scene.add(ambientLight);
   var directionalLight = new DirectionalLight(0xf9f295, 0.8);
@@ -72735,7 +72741,16 @@ var options = {
   strings: ['גם אתם רוצים נוככות ^100דיגיטאלית?', 'גם אתם רוצים נוכחות דיגיטאלית!'],
   typeSpeed: 40,
   backSpeed: 80,
-  backDelay: 1000
+  backDelay: 1000,
+  onComplete: function onComplete(typedEl) {
+    var sections = document.querySelectorAll('main .section');
+
+    for (var i = 0; i < sections.length; i++) {
+      sections[i].classList.remove('d-hidden');
+    }
+  }
 };
-new Typed('#title_1', options);
 init();
+new Typed('#title_1', options);
+document.body.classList.remove('loading');
+document.body.classList.add('done');

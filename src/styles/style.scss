@@ -20,7 +20,9 @@
     --clr-background: #979797;
 
 }
-
+.d-hidden {
+    display: none !important;
+}
 #globeViz {
     position: fixed;
     top:0;
@@ -31,18 +33,16 @@ main {
     top: 0;
     left: 0;
     color: white;
-    
+
     .section {
         display: flex;
-        min-height: 100vh;
+        height: 100vh;
+        width: 100vw;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        .text {
-            border: 1px solid red;
-        }
         &:nth-child(1) {
-            min-height: 300vh;
+            //min-height: 300vh;
             justify-content: start;
             .content {
                 position: sticky;
@@ -70,45 +70,59 @@ main {
         }
 
         &:nth-child(2) {
-            
-            //position: relative;
-            .filler {
-                scroll-snap-align: start;
-                height: 100vh;
-                width: 100%;
-                
-            }
+            position: relative;
+            height: 700vh;
             .content {
                 position: absolute;
                 direction: rtl;
+                top: 0px;
                 h2 {
                     position: relative;
                     display: flex;
                     justify-content: center;
 
                     flex-direction: column;//*/
-                    div{
+                    .line{
                         position: sticky;
                         
-                        display: block;
-                        line-height: 100vh;
+                        //display: block;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        //line-height: 100vh;
                         height: 100vh;
                         color:white;
                         font-size: 2.7rem;
                         margin-top: calc(100vh - var(--i));
+                        .text {
+                            flex:1;
+                            background-color: rgba(0, 0, 0, 0.432);
 
+                        }
+                        
                     }
-                    div:nth-child(1){
+                    .line:nth-child(1){
                         top: 0px;
+                        .text {
+                            @include bg-gradient();
+                            border-radius: 25px;
+                            border-bottom-left-radius: 0px;
+                            border-bottom-right-radius: 0px;
+                            padding: 20px;
+                            color: black;
+                        }
                     }
-                    div:nth-child(2){
-                        top: 50px;
+                    .line:nth-child(2){
+                        top: 69px;
                     }
-                    div:nth-child(3){
-                        top: 100px;
+                    .line:nth-child(3){
+                        top: 118px;
                     }
-                    div:nth-child(4){
-                        top: 150px;
+                    .line:nth-child(4){
+                        top: 167px;
+                    }
+                    .line:nth-child(5){
+                        top: 216px;
                     }
                 }
             }

@@ -17,11 +17,19 @@ import * as THREE from './ThreeUtils';
 
 const camera = new THREE.PerspectiveCamera();
 const Globe = new ThreeGlobe();
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ alpha: true });
 const scene = new THREE.Scene();
 
 const N = 20;
 export function init() {
+  const loader = new THREE.TextureLoader();
+  loader.load('bg_image.jpg' , function(texture)
+            {
+              texture.app
+              scene.background = texture;  
+            });
+
+
   console.log('init canvas');
   const arcsData = [...Array(N).keys()].map(() => ({
     startLat: (Math.random() - 0.5) * 180,
@@ -40,23 +48,25 @@ export function init() {
     .arcDashGap(4)
     .arcDashInitialGap(() => Math.random() * 5)
     .arcDashAnimateTime(1000);
-
+    
   // Setup renderer
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById('globeViz').appendChild(renderer.domElement);
 
   // Setup scene
   scene.add(Globe);
-  var root_style = getComputedStyle(document.body)
-  debugger;
-  var background_color = root_style.getPropertyValue('--clr-background');
-  background_color = 0x979797;//background_color.replace('#', '0x');
-  scene.background = new THREE.Color(background_color);
-  console.log(scene.background);
+  //var root_style = getComputedStyle(document.body)
+  //var background_color = root_style.getPropertyValue('--clr-background');
+  //background_color = 0x979797;//background_color.replace('#', '0x');
+  //scene.background = new THREE.Color(background_color);
+  //console.log(scene.background);
+  scene.background = new THREE.Color(0x97979797);
   const ambientLight = new THREE.AmbientLight(0xf9f295);
   scene.add(ambientLight);
   const directionalLight = new THREE.DirectionalLight(0xf9f295, 0.8);
   scene.add(directionalLight);
+
+
 
   //const pointLight = new THREE.PointLight( 0xffffff, 1, 10000 );
   //pointLight
