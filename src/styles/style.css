@@ -118,6 +118,7 @@ main .section:nth-child(2) .content h2 {
 main .section:nth-child(2) .content h2 .line {
   position: -webkit-sticky;
   position: sticky;
+  top: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -130,7 +131,6 @@ main .section:nth-child(2) .content h2 .line {
   height: 100vh;
   color: white;
   font-size: 2.7rem;
-  margin-top: calc(100vh - var(--i));
 }
 
 main .section:nth-child(2) .content h2 .line .text {
@@ -138,10 +138,6 @@ main .section:nth-child(2) .content h2 .line .text {
       -ms-flex: 1;
           flex: 1;
   background-color: rgba(0, 0, 0, 0.432);
-}
-
-main .section:nth-child(2) .content h2 .line:nth-child(1) {
-  top: 0px;
 }
 
 main .section:nth-child(2) .content h2 .line:nth-child(1) .text {
@@ -164,21 +160,5 @@ main .section:nth-child(2) .content h2 .line:nth-child(1) .text {
   main .section:nth-child(2) .content h2 .line:nth-child(1) .text {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff9f295", endColorstr="#fff9f295", GradientType=1);
   }
-}
-
-main .section:nth-child(2) .content h2 .line:nth-child(2) {
-  top: 69px;
-}
-
-main .section:nth-child(2) .content h2 .line:nth-child(3) {
-  top: 118px;
-}
-
-main .section:nth-child(2) .content h2 .line:nth-child(4) {
-  top: 167px;
-}
-
-main .section:nth-child(2) .content h2 .line:nth-child(5) {
-  top: 216px;
 }
 /*# sourceMappingURL=style.css.map */

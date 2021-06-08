@@ -72737,16 +72737,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 var Typed = unwrapExports(typed);
 
+var sections = document.querySelectorAll('main .section');
+
+for (var i = 0; i < sections.length; i++) {
+  sections[i].classList.remove('d-hidden');
+} // TODO: remove in production
+
+
+console.log('sections are viseble');
 var options = {
   strings: ['גם אתם רוצים נוככות ^100דיגיטאלית?', 'גם אתם רוצים נוכחות דיגיטאלית!'],
   typeSpeed: 40,
   backSpeed: 80,
   backDelay: 1000,
   onComplete: function onComplete(typedEl) {
-    var sections = document.querySelectorAll('main .section');
-
-    for (var i = 0; i < sections.length; i++) {
-      sections[i].classList.remove('d-hidden');
+    for (var _i = 0; _i < sections.length; _i++) {
+      sections[_i].classList.remove('d-hidden');
     }
   }
 };
