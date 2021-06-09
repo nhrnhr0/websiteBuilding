@@ -2,7 +2,6 @@ import * as threeImp from './three/mainThreejs.js';
 import Typed from 'typed.js';
 
 var sections = document.querySelectorAll('main .section');
-
 for(let i = 0; i < sections.length; i++) {
   sections[i].classList.remove('d-hidden');
 

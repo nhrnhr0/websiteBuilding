@@ -1,6 +1,6 @@
-import ThreeGlobe from 'three-globe';
 //import * as THREE from 'three';
-import * as THREE from './ThreeUtils';
+//import * as THREE from './ThreeUtils';
+import { PerspectiveCamera, WebGLRenderer, Scene,TextureLoader,Color,AmbientLight,DirectionalLight } from 'three';
 
 //import * as  TrackballControls from '.\node_modules\three\examples\js\controls\TrackballControls';
 //
@@ -15,14 +15,12 @@ import * as THREE from './ThreeUtils';
 
 //import { TrackballControls } from '.\node_modules\three\examples\js\controls\TrackballControls'
 
-const camera = new THREE.PerspectiveCamera();
-const Globe = new ThreeGlobe();
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-const scene = new THREE.Scene();
+const camera = new PerspectiveCamera();
+const renderer = new WebGLRenderer({ alpha: true });
+const scene = new Scene();
 
-const N = 20;
 export function init() {
-  const loader = new THREE.TextureLoader();
+  const loader = new TextureLoader();
   loader.load('bg_image.jpg' , function(texture)
             {
               texture.app
@@ -31,44 +29,29 @@ export function init() {
 
 
   console.log('init canvas');
-  const arcsData = [...Array(N).keys()].map(() => ({
-    startLat: (Math.random() - 0.5) * 180,
-    startLng: (Math.random() - 0.5) * 360,
-    endLat: (Math.random() - 0.5) * 180,
-    endLng: (Math.random() - 0.5) * 360,
-    color: ['rgb(249, 242, 149)', 'rgb(224, 170, 62)', 'rgb(249, 242, 149)', 'rgb(224, 170, 62)'][Math.round(Math.random() * 3)]
-  }));
-
-
-
-  Globe.globeImageUrl('https://image.shutterstock.com/image-vector/gold-world-map-vector-600w-1294298026.jpg')
-    .arcsData(arcsData)
-    .arcColor('color')
-    .arcDashLength(0.4)
-    .arcDashGap(4)
-    .arcDashInitialGap(() => Math.random() * 5)
-    .arcDashAnimateTime(1000);
-    
+  
   // Setup renderer
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.getElementById('globeViz').appendChild(renderer.domElement);
 
   // Setup scene
-  scene.add(Globe);
+  //scene.add(Globe);
+
+
   //var root_style = getComputedStyle(document.body)
   //var background_color = root_style.getPropertyValue('--clr-background');
   //background_color = 0x979797;//background_color.replace('#', '0x');
-  //scene.background = new THREE.Color(background_color);
+  //scene.background = new Color(background_color);
   //console.log(scene.background);
-  scene.background = new THREE.Color(0x97979797);
-  const ambientLight = new THREE.AmbientLight(0xf9f295);
+  scene.background = new Color(0x97979797);
+  const ambientLight = new AmbientLight(0xf9f295);
   scene.add(ambientLight);
-  const directionalLight = new THREE.DirectionalLight(0xf9f295, 0.8);
+  const directionalLight = new DirectionalLight(0xf9f295, 0.8);
   scene.add(directionalLight);
 
 
 
-  //const pointLight = new THREE.PointLight( 0xffffff, 1, 10000 );
+  //const pointLight = new PointLight( 0xffffff, 1, 10000 );
   //pointLight
   //pointLight.position.set( 250, 40, 250 );
   //scene.add( pointLight );
@@ -106,6 +89,6 @@ function moveCameraOnScrool() {
   camera.position.z = t * -0.1 + 500;
   camera.position.x = Math.min(t * -0.1, 190);
 
-  //Globe.position.add(new THREE.Vector3(0,0,1));
+  //Globe.position.add(new Vector3(0,0,1));
   Globe.rotation.set(0, t * 0.003, 0);
 }
