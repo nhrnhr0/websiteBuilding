@@ -1,43 +1,21 @@
-'use strict';
 
-//import ThreeGlobe from 'three-globe';
+/*import 'three';
 
-const N = 20;
-  const arcsData = [...Array(N).keys()].map(() => ({
-    startLat: (Math.random() - 0.5) * 180,
-    startLng: (Math.random() - 0.5) * 360,
-    endLat: (Math.random() - 0.5) * 180,
-    endLng: (Math.random() - 0.5) * 360,
-    color: ['rgb(249, 242, 149)', 'rgb(224, 170, 62)', 'rgb(249, 242, 149)', 'rgb(224, 170, 62)'][Math.round(Math.random() * 3)]
-  }));
-
-
-
-  //Globe.globeImageUrl('https://image.shutterstock.com/image-vector/gold-world-map-vector-600w-1294298026.jpg')
-const Globe = new ThreeGlobe();
-Globe.globeImageUrl('globe_texture.jpg')
-.arcsData(arcsData)
-.arcColor('color')
-.arcDashLength(0.4)
-.arcDashGap(4)
-.arcDashInitialGap(() => Math.random() * 5)
-.arcDashAnimateTime(1000);
-
-
-
-
-
+import {Globe}  from './threeGlobImp';*/
+console.log('change');
 const camera = new THREE.PerspectiveCamera();
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-const scene = new THREE.Scene();
+const renderer = new WebGLRenderer({ alpha: true });
+const scene = new Scene();
 function initThreeJs() {
-    console.log('initThreeJs');
-  const loader = new THREE.TextureLoader();
+  const loader = new TextureLoader();
   loader.load('bg_image.jpg' , function(texture)
             {
-              texture.app;
+              texture.app
               scene.background = texture;  
             });
+
+
+  console.log('init canvas');
   
   // Setup renderer
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -52,10 +30,10 @@ function initThreeJs() {
   //background_color = 0x979797;//background_color.replace('#', '0x');
   //scene.background = new Color(background_color);
   //console.log(scene.background);
-  scene.background = new THREE.Color(0x97979797);
-  const ambientLight = new THREE.AmbientLight(0xf9f295);
+  scene.background = new Color(0x97979797);
+  const ambientLight = new AmbientLight(0xf9f295);
   scene.add(ambientLight);
-  const directionalLight = new THREE.DirectionalLight(0xf9f295, 0.8);
+  const directionalLight = new DirectionalLight(0xf9f295, 0.8);
   scene.add(directionalLight);
   //initGlobe();
 

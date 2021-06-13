@@ -18,6 +18,7 @@
 
 :root {
     --clr-background: #979797;
+    --default-font-size: 2rem;
 
 }
 .d-hidden {
@@ -70,6 +71,90 @@ main {
         }
 
         &:nth-child(2) {
+            #parralex_container {
+                width: 100%;
+                height: 100%;
+                font-size: var(--default-font-size);
+                text-align: center;
+                direction: rtl;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                & .line  {
+                    width: 80%;
+                    background-color: #00000054;
+                    padding-left: 25px;
+                    padding-right: 25px;
+                }
+                & .line:nth-child(1) {
+                    @include bg-gradient();
+                    color: black;
+                    font-weight: bold;
+                    border-top-left-radius: 25px;
+                    border-top-right-radius: 25px;
+                }
+                & .line:last-child {
+                    border-bottom-left-radius: 25px;
+                    border-bottom-right-radius: 25px;
+                }
+
+                .conclution {
+                    @include bg-gradient();
+                    margin-top: 25px;
+                    border-radius: 25px;
+                    margin-left: 5%;
+                    margin-right: 5%;
+                    color: black;
+                    font-weight: bold;
+                }
+
+                
+            }
+
+            .websites {
+                display: flex;
+                flex-direction: column;
+                width: 90vw;
+                .website-wraper {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    .iframe {
+                        flex: 1;
+                        width: 100%;
+                        
+                        iframe {
+                            min-height: 50vh;
+                            width: 100%;
+                        }
+                    }
+                    .content {
+                        direction: rtl;
+                        font-size: var(--default-font-size);
+                        color:black;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        //@include bg-gradient();
+
+                        border-radius: 25px;
+                        flex :1;
+                        ul {
+                            background-color: #ffffffd7;
+                            padding: 50px;
+                            border-radius: 25px;
+                            box-shadow: 10px 10px 5px #edce6a;
+                            li {
+                            }
+                            
+                        }
+                    }
+                }
+            }
+            /*
             position: relative;
             height: 700vh;
             .content {
@@ -81,7 +166,7 @@ main {
                     display: flex;
                     justify-content: center;
 
-                    flex-direction: column;//*/
+                    flex-direction: column;
                     .line{
                         position: sticky;
                         top: 0px;
@@ -131,7 +216,7 @@ main {
                         //top: 216px;
                     }
                 }
-            }
+            }*/
         }
     }
 }

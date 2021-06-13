@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>title</title>
-    <link rel="stylesheet" href="src/styles/style.css">
     
     <!-- <link rel="preload" as="image" href="bg_image.jpg"> -->
     <script>
@@ -23,10 +22,15 @@
             console.log('image2 loaded');
         };
     </script>
-
-
-    <script src="./build/scripts/bundle.js" type="module" defer></script>
-    <script src="./build/scripts/bundle2.js" type="module" defer></script>
+    <!--
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer" defere></script>
+    <script src="https://unpkg.com/three-globe@2.18.3/dist/three-globe.js" defer></script>
+    -->
+    <script src="./build/scripts/vendors/three.min.js" defer></script>
+    <script src="./build/scripts/vendors/three-globe.min.js" defer></script>
+    <script src="./build/scripts/bundle.js" defer></script>
+    <script src="./build/scripts/bundle2.js" defer></script>
     
 
     <style>
@@ -114,31 +118,99 @@
                 </div>
             </div>
             
-            <div class="section d-hidden">
-                <div class="content">
-                    <h2>
-                        <div class="line" style="--i:1;">
+            <div  class="section d-hidden">
+                <div id="parralex_container">
+                        <div  class="line rellax"data-rellax-speed="-4" >
                             <div class="text">
                              למעלה מ54% מהעסקעות בכל יום נסגרות ברשת...
                             </div></div>
-                        <div class="line" id="temp" style="--i:2;">
+                        <div class="line rellax" data-rellax-speed="-4">
                             <div class="text">רוצים שכולם ידעו מי אתם?</div></div>
-                        <div class="line" style="--i:3;">
+                        <div class="line rellax" data-rellax-speed="-4">
                             <div class="text">
                             נמאס לכם להדפיס פלאיירים?</div></div>
-                        <div class="line" style="--i:4;">
+                        <div class="line rellax" data-rellax-speed="-4">
                             <div class="text">
                             לא רוצים לבזבז כסף על שיווק?</div>
                         </div>
-                        <div class="line" style="--i:5;">
+                        <div class="line rellax" data-rellax-speed="-4">
                             <div class="text">
                             מפחדים להישאר מאחור?</div></div>
-                        <div class="line" style="--i:6;"><div class="text"></div></div>
-                        <div class="line" style="--i:7;"><div class="text"></div></div>
-                    </h2>
+                            <div class="conclution rellax" data-rellax-speed="-4">
+                                אנו באמ אס גלובל מתחמים בבנית דפי נחיתה מותאמים אישית
+                            </div>
+                        </div>
 
-                </div>
+                        <div class="websites rellax"data-rellax-speed="-4" >
+                            <div class="website-wraper">
+                                <div class="iframe">
+                                    <iframe scrolling="no" src="http://shermakdogs.com/" frameborder="0"></iframe>
+                                </div>
+                                <div class="content">
+                                    <ul>
+                                        <li>
+                                            קופיריטינג
+                                        </li>
+                                        <li>
+                                            עיצוב גרפי
+                                        </li>
+                                        <li>
+                                            אופטימזציה
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <div class="website-wraper">
+                                <div class="content">
+                                    <ul>
+                                        <li>אחסנה לשנה</li>
+                                        <li>דומיין לשנה</li>
+                                        <li>חיבור אנליטיקה</li>
+                                    </ul>
+                                </div>
+                                <div class="iframe">
+                                    <iframe  scrolling="no" src="http://shermakdogs.com/" frameborder="0"></iframe>
+                                </div>
+                                
+                            </div>
+
+
+                            <div class="website-wraper">
+                                <div class="iframe">
+                                    <iframe scrolling="no" src="http://shermakdogs.com/" frameborder="0"></iframe>
+                                </div>
+                                <div class="content">
+                                    <ul>
+                                        <li>תכנון פאנאל לפי דרישה</li>
+                                        <li>פיצרים מותאמים אישית</li>
+                                        <li>שליחת לידים בצורה ברורה</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="website-wraper">
+                                
+                                <div class="content">
+                                    <ul>
+                                        <li>זמן אספקה מהיר</li>
+                                        <li>שירות אדיב ומקצועי</li>
+                                        <li>מחירים מנצחים</li>
+                                    </ul>
+                                </div>
+                                <div class="iframe">
+                                    <iframe scrolling="no" src="http://shermakdogs.com/" frameborder="0"></iframe>
+                                </div>
+                            </div>
+                        </div>
             </div>
+            <div class="section d-hidden"></div>
+            <div class="section d-hidden"></div>
+            <div class="section d-hidden"></div>
+            <div class="section d-hidden"></div>
+            <div class="section d-hidden"></div>
+            <!--
+            
             <div class="section d-hidden">
                 <div class="text">אנו באמ אס גלובל מתחמים בבנית דפי נחיתה מותאמים אישית.</div>
                 <div class="text">Soluta quod obcaecati, repellat veritatis facere natus quasi dolor repudiandae ut
@@ -181,9 +253,11 @@
                     neque, culpa nostrum officiis saepe consequatur id consequuntur eaque animi facere nam eius
                     repellendus quidem error eos.</div>
             </div>
-        
+        -->
         </main>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+    <link rel="stylesheet" href="src/styles/style.css">
+
 </body>
 
 </html>

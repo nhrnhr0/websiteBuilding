@@ -1,16 +1,14 @@
 import babel from 'rollup-plugin-babel'
-import resolve from 'rollup-plugin-node-resolve';
+import nodeResolve  from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs'
-import {
-    terser
-} from "rollup-plugin-terser";
+//import { rollup } from "rollup";
+import { terser } from "rollup-plugin-terser";
+ 
 
-var production = false;
+var production = true;
 
-
-var plugings = [
-    resolve({
-
+/**
+ * 
         // the fields to scan in a package.json to determine the entry point
         // if this list contains "browser", overrides specified in "pkg.browser"
         // will be used
@@ -35,10 +33,21 @@ var plugings = [
         // to prevent bundling the same package multiple times if package is
         // imported from dependencies.
         dedupe: ['three', 'three-glob', 'TrackballControls'], // Default: []
+ * 
+ */
+var plugings = [
+    
+    nodeResolve ({
+        jsnext: true,
+        main: true,
+        preferBuiltins: true,
+        browser: true,
     }),
     commonjs({
         include: 'node_modules/**'
     }),
+    
+    
     babel({
         exclude: 'node_modules/**',
     }),
@@ -50,19 +59,18 @@ if (production) {
 }
 
 var globals = {
-    'THREE': 'three',
-
-}
+    //'THREE': 'three',
+}//external:['three'],
 export default 
     [ {
-        input: 'src/scripts/three/threeGlobImp.js',
+        input: 'src/scripts/three.final.js',//three/mainThreejs.js',
         output: {
             file: 'build/scripts/bundle2.js',
             format: 'cjs',
             globals: globals,
         },
         plugings: plugings,
-    }, { //external:['three'],
+    }, { 
             input: 'src/scripts/main.js',
             output: {
                 file: 'build/scripts/bundle.js',
@@ -71,4 +79,22 @@ export default
             },
             plugins: plugings,
         },
+
+
+        { 
+            input: 'src/scripts/vendors/three.js',
+            output: {
+                file: 'build/scripts/vendors/three.min.js',
+            },
+            plugins: [],
+        },
+       
+        {
+            input: 'src/scripts/vendors/three-globe.js',
+            output: {
+                file: 'build/scripts/vendors/three-globe.min.js',
+            },
+            plugings: [terser()],
+            
+        }
     ];
