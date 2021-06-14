@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>title</title>
-    
+
     <!-- <link rel="preload" as="image" href="bg_image.jpg"> -->
     <script>
         var imageObj = new Image();
         imageObj.src = './bg_image.jpg';
-        imageObj.onload = function() {
+        imageObj.onload = function () {
             //image is loaded, create pattern
             console.log('image loaded');
         };
         var imageObj2 = new Image();
         imageObj2.src = './globe_texture.jpg';
-        imageObj2.onload = function() {
+        imageObj2.onload = function () {
             //image is loaded, create pattern
             console.log('image2 loaded');
         };
@@ -31,16 +31,18 @@
     <script src="./build/scripts/vendors/three-globe.min.js" defer></script>
     <script src="./build/scripts/bundle.js" defer></script>
     <script src="./build/scripts/bundle2.js" defer></script>
-    
+
 
     <style>
         body {
             margin: 0;
-            
+
         }
+
         body.done .loader-wraper {
             display: none;
         }
+
         body.loading .loader-wraper {
             z-index: 1;
             background-color: rgb(0 0 0);
@@ -50,15 +52,18 @@
             justify-content: center;
             align-items: center;
         }
+
         body.loading .loader {
             z-index: 1;
             position: relative;
             width: 80px;
         }
+
         #loader_text {
-            color:white;
+            color: white;
             font-size: larger;
         }
+
         body.loading .loader span {
             width: 21px;
             height: 21px;
@@ -66,9 +71,11 @@
             background-color: #fff;
             animation: square 2s linear infinite;
         }
+
         body.loading main {
             display: none;
         }
+
         body.done main {
             display: block;
         }
@@ -77,145 +84,160 @@
             0% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(25px);
                 opacity: 0;
             }
         }
+
         body.loading .loader span:nth-child(2) {
-        animation-delay: .4s;
+            animation-delay: .4s;
         }
+
         body.loading .loader span:nth-child(3) {
             animation-delay: .6s;
         }
+
         body.loading .loader span:nth-child(4) {
             animation-delay: .8s;
         }
+
         body.loading .loader span:nth-child(5) {
             animation-delay: 1s;
         }
+
         body.loading .loader span:nth-child(6) {
             animation-delay: 1.2s;
         }
-        
     </style>
     <!--<link rel="preload" as="image" href="//unpkg.com/three-globe/example/img/earth-night.jpg">-->
 </head>
 
 <body class="loading">
     <div class="loader-wraper">
-    <div class="loader">
-        <div id="loader_text" class="text">loading...</div>
-        <span></span><span></span><span></span><span></span><span></span><span></span>
+        <div class="loader">
+            <div id="loader_text" class="text">loading...</div>
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
     </div>
-    </div>
-        <div id="globeViz"></div>
-        <main>
+    <div id="globeViz"></div>
+    <main>
 
-            <div class="section">
-                <div class="content">
-                    <h1 id="title_1"></h1>
-                    
+        <div class="section">
+            <div class="content">
+                <h1 id="title_1"></h1>
+
+            </div>
+            <h1 id="arrow">↓</h1>
+        </div>
+        <div class="section d-hidden"></div>
+        <div class="section d-hidden">
+            <div id="parralex_container">
+                    <div class="line gold-bg" style="--i: 0;">
+                        <div class="text">
+                            למעלה מ54% מהעסקעות בכל יום נסגרות ברשת...
+                        </div>
+                    </div>
+                    <div class="line" style="--i: 1;">
+                        <div class="text">רוצים שכולם ידעו מי אתם?</div>
+                    </div>
+
+                <div class="line" style="--i: 2;">
+                    <div class="text">
+                        נמאס לכם להדפיס פלאיירים?</div>
                 </div>
-                <h1 id="arrow">↓</h1>
-            </div>
-            <div class="section d-hidden"></div>
-            <div  class="section d-hidden">
-                <div id="parralex_container">
-                        <div  class="line" >
-                            <div class="text">
-                             למעלה מ54% מהעסקעות בכל יום נסגרות ברשת...
-                            </div></div>
-                        <div class="line">
-                            <div class="text">רוצים שכולם ידעו מי אתם?</div></div>
-                        <div class="line">
-                            <div class="text">
-                            נמאס לכם להדפיס פלאיירים?</div></div>
-                        <div class="line">
-                            <div class="text">
-                            לא רוצים לבזבז כסף על שיווק?</div>
-                        </div>
-                        <div class="line">
-                            <div class="text">
-                            מפחדים להישאר מאחור?</div></div>
-                            <div class="conclution">
-                                אנו באמ אס גלובל מתחמים בבנית דפי נחיתה מותאמים אישית
-                            </div>
-                        </div>
-
-                        
-            </div>
-            <div class="section d-hidden"></div>
-            <div class="section d-hidden">
-                <div class="websites" >
-                    <div class="website-wraper">
-                        <div class="iframe">
-                            <iframe scrolling="no" src="http://shermakdogs.com/" frameborder="0"></iframe>
-                        </div>
-                        <div class="content">
-                            <ul>
-                                <li>
-                                    קופיריטינג
-                                </li>
-                                <li>
-                                    עיצוב גרפי
-                                </li>
-                                <li>
-                                    אופטימזציה
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-
-                    <div class="website-wraper">
-                        <div class="content">
-                            <ul>
-                                <li>אחסנה לשנה</li>
-                                <li>דומיין לשנה</li>
-                                <li>חיבור אנליטיקה</li>
-                            </ul>
-                        </div>
-                        <div class="iframe">
-                            <iframe  scrolling="no" src="http://freeflow.ms-global.co.il/" frameborder="0"></iframe>
-                        </div>
-                        
-                    </div>
-
-
-                    <div class="website-wraper">
-                        <div class="iframe">
-                            <iframe scrolling="no" src="http://lead.ms-global.co.il/" frameborder="0"></iframe>
-                        </div>
-                        <div class="content">
-                            <ul>
-                                <li>תכנון פאנאל לפי דרישה</li>
-                                <li>פיצרים מותאמים אישית</li>
-                                <li>שליחת לידים בצורה ברורה</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="website-wraper">
-                        
-                        <div class="content">
-                            <ul>
-                                <li>זמן אספקה מהיר</li>
-                                <li>שירות אדיב ומקצועי</li>
-                                <li>מחירים מנצחים</li>
-                            </ul>
-                        </div>
-                        <div class="iframe">
-                            <iframe scrolling="no" src="https://nhrnhr0.github.io/harelFitoussi/index.html" frameborder="0"></iframe>
-                        </div>
-                    </div>
+                <div class="line" style="--i: 3;">
+                    <div class="text">
+                        לא רוצים לבזבז כסף על שיווק?</div>
+                </div>
+                <div class="line" style="--i: 4;">
+                    <div class="text">
+                        מפחדים להישאר מאחור?</div>
+                </div>
+                <div class="line gold-bg" style="--i: 5;">
+                    אנו באמ אס גלובל מתחמים בבנית דפי נחיתה מותאמים אישית
+                </div>
+                <div class="line" style="--i: 6;">
+                    <br>
                 </div>
 
             </div>
-            <div class="section d-hidden"></div>
-            <div class="section d-hidden"></div>
-            <div class="section d-hidden"></div>
-            <div class="section d-hidden"></div>
-            <!--
+
+
+        </div>
+        <div class="section d-hidden"></div>
+        <div class="section d-hidden">
+            <div class="websites">
+                <div class="website-wraper">
+                    <div class="iframe">
+                        <iframe scrolling="no" src="http://shermakdogs.com/" frameborder="0"></iframe>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li>
+                                קופיריטינג
+                            </li>
+                            <li>
+                                עיצוב גרפי
+                            </li>
+                            <li>
+                                אופטימזציה
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="website-wraper">
+                    <div class="content">
+                        <ul>
+                            <li>אחסנה לשנה</li>
+                            <li>דומיין לשנה</li>
+                            <li>חיבור אנליטיקה</li>
+                        </ul>
+                    </div>
+                    <div class="iframe">
+                        <iframe scrolling="no" src="http://freeflow.ms-global.co.il/" frameborder="0"></iframe>
+                    </div>
+
+                </div>
+
+
+                <div class="website-wraper">
+                    <div class="iframe">
+                        <iframe scrolling="no" src="http://lead.ms-global.co.il/" frameborder="0"></iframe>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li>תכנון פאנאל לפי דרישה</li>
+                            <li>פיצרים מותאמים אישית</li>
+                            <li>שליחת לידים בצורה ברורה</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="website-wraper">
+
+                    <div class="content">
+                        <ul>
+                            <li>זמן אספקה מהיר</li>
+                            <li>שירות אדיב ומקצועי</li>
+                            <li>מחירים מנצחים</li>
+                        </ul>
+                    </div>
+                    <div class="iframe">
+                        <iframe scrolling="no" src="https://nhrnhr0.github.io/harelFitoussi/index.html"
+                            frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="section d-hidden"></div>
+        <div class="section d-hidden"></div>
+        <div class="section d-hidden"></div>
+        <div class="section d-hidden"></div>
+        <!--
             
             <div class="section d-hidden">
                 <div class="text">אנו באמ אס גלובל מתחמים בבנית דפי נחיתה מותאמים אישית.</div>
@@ -260,7 +282,7 @@
                     repellendus quidem error eos.</div>
             </div>
         -->
-        </main>
+    </main>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
     <link rel="stylesheet" href="src/styles/style.css">
 

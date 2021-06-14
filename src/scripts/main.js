@@ -5,11 +5,11 @@ import Typed from 'typed.js';
 var sections = document.querySelectorAll('main .section');
 
 // TODO: remove in production
-/*
+
 for(let i = 0; i < sections.length; i++) {
   sections[i].classList.remove('d-hidden');
-
-} */
+} 
+console.log('done remove d hidden');
 var options = {
   strings: ['גם אתם רוצים נוככות ^100דיגיטאלית?',
             'גם אתם רוצים נוכחות דיגיטאלית!'],
